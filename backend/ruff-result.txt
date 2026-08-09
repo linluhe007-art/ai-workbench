@@ -1,0 +1,457 @@
+EXE002 The file is executable but no shebang is present
+--> alembic/env.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/agents/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/agents/adapters/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/agents/base.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/api/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/api/v1/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/api/v1/health.py:1:1
+
+B008 Do not perform function call `Depends` in argument defaults; instead, perform the call within the function, or read the default from a module-level singleton variable
+  --> app/api/v1/health.py:24:40
+   |
+23 | @router.get("/db")
+24 | async def db_health(db: AsyncSession = Depends(get_db)):
+   |                                        ^^^^^^^^^^^^^^^
+25 |     try:
+26 |         result = await db.execute(text("SELECT 1"))
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/api/v1/health.py:29:12
+   |
+27 |         result.scalar()
+28 |         return {"status": "healthy", "service": "postgresql"}
+29 |     except Exception as e:
+   |            ^^^^^^^^^
+30 |         return {"status": "unhealthy", "service": "postgresql", "error": str(e)}
+   |
+
+B008 Do not perform function call `Depends` in argument defaults; instead, perform the call within the function, or read the default from a module-level singleton variable
+  --> app/api/v1/health.py:34:41
+   |
+33 | @router.get("/redis")
+34 | async def redis_health(r: redis.Redis = Depends(get_redis)):
+   |                                         ^^^^^^^^^^^^^^^^^^
+35 |     try:
+36 |         await r.ping()
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/api/v1/health.py:38:12
+   |
+36 |         await r.ping()
+37 |         return {"status": "healthy", "service": "redis"}
+38 |     except Exception as e:
+   |            ^^^^^^^^^
+39 |         return {"status": "unhealthy", "service": "redis", "error": str(e)}
+   |
+
+B008 Do not perform function call `Depends` in argument defaults; instead, perform the call within the function, or read the default from a module-level singleton variable
+  --> app/api/v1/health.py:43:42
+   |
+42 | @router.get("/all")
+43 | async def full_health(db: AsyncSession = Depends(get_db), r: redis.Redis = Depends(get_redis)):
+   |                                          ^^^^^^^^^^^^^^^
+44 |     services = {}
+   |
+
+B008 Do not perform function call `Depends` in argument defaults; instead, perform the call within the function, or read the default from a module-level singleton variable
+  --> app/api/v1/health.py:43:76
+   |
+42 | @router.get("/all")
+43 | async def full_health(db: AsyncSession = Depends(get_db), r: redis.Redis = Depends(get_redis)):
+   |                                                                            ^^^^^^^^^^^^^^^^^^
+44 |     services = {}
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/api/v1/health.py:49:12
+   |
+47 |         await db.execute(text("SELECT 1"))
+48 |         services["postgresql"] = "healthy"
+49 |     except Exception as e:
+   |            ^^^^^^^^^
+50 |         services["postgresql"] = f"unhealthy: {e}"
+   |
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/api/v1/health.py:55:12
+   |
+53 |         await r.ping()
+54 |         services["redis"] = "healthy"
+55 |     except Exception as e:
+   |            ^^^^^^^^^
+56 |         services["redis"] = f"unhealthy: {e}"
+   |
+
+EXE002 The file is executable but no shebang is present
+--> app/api/v1/memory.py:1:1
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/api/v1/memory.py:38:12
+   |
+36 |         stats = mem.get_stats()
+37 |         return {"status": "ok", "data": stats}
+38 |     except Exception as e:
+   |            ^^^^^^^^^
+39 |         logger.error("Memory stats failed", error=str(e))
+40 |         return {"status": "error", "message": str(e)}
+   |
+
+EXE002 The file is executable but no shebang is present
+--> app/api/v1/orchestrator.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/api/v1/router.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/config.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/database/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/database/redis.py:1:1
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/database/redis.py:22:12
+   |
+20 |         await redis_client.ping()
+21 |         return True
+22 |     except Exception:
+   |            ^^^^^^^^^
+23 |         return False
+   |
+
+EXE002 The file is executable but no shebang is present
+--> app/main.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/memory/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/memory/index.py:1:1
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+   --> app/memory/index.py:121:30
+    |
+119 |         conn.execute(
+120 |             "INSERT INTO schema_version (version, applied_at) VALUES (?, ?)",
+121 |             (SCHEMA_VERSION, datetime.now().isoformat()),
+    |                              ^^^^^^^^^^^^^^
+122 |         )
+123 |         logger.info("Migration complete", version=SCHEMA_VERSION)
+    |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+   --> app/memory/index.py:149:17
+    |
+147 |                 doc.summary, doc.full_text[:10000],
+148 |                 md_file.content_hash, md_file.size,
+149 |                 datetime.now().isoformat(),
+    |                 ^^^^^^^^^^^^^^
+150 |             ))
+151 |             conn.commit()
+    |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+EXE002 The file is executable but no shebang is present
+--> app/memory/parser.py:1:1
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/memory/parser.py:54:16
+   |
+52 |             content = Path(file_path).read_text(encoding="utf-8")
+53 |             return self.parse_content(content, file_path)
+54 |         except Exception as e:
+   |                ^^^^^^^^^
+55 |             logger.error("Failed to parse file", path=file_path, error=str(e))
+56 |             return self._empty_doc()
+   |
+
+EXE002 The file is executable but no shebang is present
+--> app/memory/scanner.py:1:1
+
+DTZ006 `datetime.datetime.fromtimestamp()` called without a `tz` argument
+  --> app/memory/scanner.py:87:33
+   |
+85 |                     folder=str(Path(rel_path).parent) if str(Path(rel_path).parent) != "." else "",
+86 |                     size=stat.st_size,
+87 |                     modified_at=datetime.fromtimestamp(stat.st_mtime),
+   |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+88 |                     content_hash=content_hash,
+89 |                 )
+   |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+BLE001 Do not catch blind exception: `Exception`
+   --> app/memory/scanner.py:133:16
+    |
+131 |                     h.update(chunk)
+132 |             return h.hexdigest()
+133 |         except Exception:
+    |                ^^^^^^^^^
+134 |             return ""
+    |
+
+EXE002 The file is executable but no shebang is present
+--> app/memory/service.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/agent.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/content.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/conversation.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/crawler.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/knowledge.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/message.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/platform.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/task.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/models/user.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/core.py:1:1
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+  --> app/orchestrator/core.py:58:22
+   |
+56 |     async def run(self, task: str, context: dict | None = None) -> OrchestratorResult:
+57 |         """执行完整任务流程"""
+58 |         started_at = datetime.now()
+   |                      ^^^^^^^^^^^^^^
+59 |         logger.info("Orchestrator run started", task=task[:80])
+   |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/orchestrator/core.py:77:20
+   |
+75 |                 memory_ctx = self.memory.get_memory_context(plan.context_query, agent_type=agent_type)
+76 |                 logger.info("Memory context retrieved", docs=len(memory_ctx.documents), agent_type=agent_type)
+77 |             except Exception as e:
+   |                    ^^^^^^^^^
+78 |                 logger.warning("Memory query failed", error=str(e))
+   |
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+   --> app/orchestrator/core.py:116:24
+    |
+114 |         # Step 4: 汇总
+115 |         final_output = self._aggregate_results(plan, step_results)
+116 |         completed_at = datetime.now()
+    |                        ^^^^^^^^^^^^^^
+117 |         total_ms = int((completed_at - started_at).total_seconds() * 1000)
+    |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/executor.py:1:1
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+  --> app/orchestrator/executor.py:62:22
+   |
+60 |             StepResult
+61 |         """
+62 |         started_at = datetime.now()
+   |                      ^^^^^^^^^^^^^^
+63 |         agent = self.router.route(step.type.value, step.agent_hint)
+   |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+  --> app/orchestrator/executor.py:80:32
+   |
+78 |             try:
+79 |                 result = await self._call_agent(agent, step.type, agent_input)
+80 |                 completed_at = datetime.now()
+   |                                ^^^^^^^^^^^^^^
+81 |                 duration = int((completed_at - started_at).total_seconds() * 1000)
+   |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+BLE001 Do not catch blind exception: `Exception`
+   --> app/orchestrator/executor.py:99:20
+    |
+ 97 |                     duration_ms=duration,
+ 98 |                 )
+ 99 |             except Exception as e:
+    |                    ^^^^^^^^^
+100 |                 last_error = str(e)
+101 |                 logger.warning(
+    |
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+   --> app/orchestrator/executor.py:109:24
+    |
+108 |         # 所有重试都失败
+109 |         completed_at = datetime.now()
+    |                        ^^^^^^^^^^^^^^
+110 |         duration = int((completed_at - started_at).total_seconds() * 1000)
+111 |         return StepResult(
+    |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/llm_config.py:1:1
+
+BLE001 Do not catch blind exception: `Exception`
+  --> app/orchestrator/llm_config.py:46:16
+   |
+44 |                 raw = data.get("llm", {})
+45 |             logger.info("LLM config loaded", path=str(path), provider=raw.get("provider", "mock"))
+46 |         except Exception as e:
+   |                ^^^^^^^^^
+47 |             logger.warning("Failed to load LLM config", error=str(e))
+   |
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/llm_provider.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/planner.py:1:1
+
+RUF012 Mutable default value for class attribute
+  --> app/orchestrator/planner.py:86:45
+   |
+85 |       # 意图关键词 → Pipeline 模板映射
+86 |       INTENT_PATTERNS: dict[str, list[str]] = {
+   |  _____________________________________________^
+87 | |         "content_production": ["写文章", "写一篇", "生成内容", "发布", "新闻", "热点", "脚本", "短视频"],
+88 | |         "research": ["搜索", "查找", "采集", "调研", "了解"],
+89 | |         "analysis": ["分析", "评估", "判断", "对比"],
+90 | |         "writing": ["写", "撰写", "创作", "改写", "润色"],
+91 | |         "chat": ["你好", "请问", "帮我", "什么是", "怎么"],
+92 | |     }
+   | |_____^
+93 |
+94 |       def plan(self, user_input: str) -> TaskPlan:
+   |
+help: Consider initializing in `__init__` or annotating with `typing.ClassVar`
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/router.py:1:1
+
+FURB192 Prefer `min` over `sorted()` to compute the minimum value in a sequence
+   --> app/orchestrator/router.py:105:24
+    |
+103 |             ]
+104 |             if candidates:
+105 |                 best = sorted(candidates, key=lambda a: (-a.priority, a.current_load))[0]
+    |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+106 |                 logger.info("Agent routed by capability", capability=required_capability, agent=best.id)
+107 |                 return best
+    |
+help: Replace with `min`
+
+EXE002 The file is executable but no shebang is present
+--> app/orchestrator/task_state.py:1:1
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+  --> app/orchestrator/task_state.py:41:27
+   |
+39 |     def update_status(self, status: TaskStatus, error: str = ""):
+40 |         self.status = status
+41 |         self.updated_at = datetime.now()
+   |                           ^^^^^^^^^^^^^^
+42 |         if error:
+43 |             self.error = error
+   |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+DTZ005 `datetime.datetime.now()` called without a `tz` argument
+  --> app/orchestrator/task_state.py:47:27
+   |
+45 |     def mark_step_done(self):
+46 |         self.steps_completed += 1
+47 |         self.updated_at = datetime.now()
+   |                           ^^^^^^^^^^^^^^
+48 |
+49 |     def to_dict(self) -> dict:
+   |
+help: Pass a `datetime.timezone` object to the `tz` parameter
+
+EXE002 The file is executable but no shebang is present
+--> app/schemas/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/services/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/tasks/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/utils/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> app/utils/logger.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> tests/__init__.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> tests/test_llm_provider.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> tests/test_memory.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> tests/test_memory_index.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> tests/test_orchestrator.py:1:1
+
+EXE002 The file is executable but no shebang is present
+--> tests/test_task_state.py:1:1
+
+F841 Local variable `r2` is assigned to but never used
+  --> tests/test_task_state.py:64:9
+   |
+62 |         store = TaskStateStore()
+63 |         r1 = store.create("task1")
+64 |         r2 = store.create("task2")
+   |         ^^
+65 |         store.update(r1.task_id, TaskStatus.COMPLETED)
+66 |         completed = store.list_all(TaskStatus.COMPLETED)
+   |
+help: Remove assignment to unused variable `r2`
+
+Found 77 errors.
+No fixes available (2 hidden fixes can be enabled with the `--unsafe-fixes` option).

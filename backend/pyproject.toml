@@ -1,0 +1,21 @@
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "BLE", "RUF", "DTZ", "FURB", "EXE"]
+ignore = [
+    "B008",      # FastAPI Depends() in function arguments — intentional
+    "EXE002",    # shebang on non-executable files — handled by chmod, not code
+    "E501",      # line length — handled by formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["BLE001"]

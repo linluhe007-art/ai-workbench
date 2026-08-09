@@ -1,0 +1,75 @@
+name: ai-workbench
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: workbench-postgres
+    environment:
+      POSTGRES_USER: workbench
+      POSTGRES_PASSWORD: workbench_dev_2026
+      POSTGRES_DB: ai_workbench
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U workbench"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  redis:
+    image: redis:7-alpine
+    container_name: workbench-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: workbench-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      REDIS_HOST: redis
+      DATABASE_URL: postgresql+asyncpg://workbench:workbench_dev_2026@postgres:5432/ai_workbench
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - ./backend:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: workbench-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+
+volumes:
+  postgres_data:
+  redis_data:

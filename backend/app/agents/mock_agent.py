@@ -22,7 +22,7 @@ class MockAgent(BaseAgent):
         self._responses: dict[str, dict] = {}  # step_id -> 预设响应
         self._call_log: list[dict] = []         # 调用记录
 
-    async def execute(self, step: TaskStep) -> dict:
+    async def execute_step(self, step: TaskStep) -> dict:
         """
         执行单个 TaskStep，返回结果 dict。
         优先返回预设响应，否则返回默认占位。
@@ -51,7 +51,7 @@ class MockAgent(BaseAgent):
         original_responses = dict(self._responses)
 
         class _ErrorAgent(MockAgent):
-            async def execute(self, step: TaskStep) -> dict:
+            async def execute_step(self, step: TaskStep) -> dict:
                 self._call_log.append({"step_id": step.id, "task_type": step.type.value, "description": step.description})
                 if step.id in self._responses and self._responses[step.id].get("_raise"):
                     raise RuntimeError(error_msg)

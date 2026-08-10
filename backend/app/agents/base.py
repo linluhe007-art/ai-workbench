@@ -63,6 +63,19 @@ class AgentResponse:
     metadata: dict = field(default_factory=dict)
 
 
+
+@dataclass
+class AgentResult:
+    """
+    Agent 执行结果 (轻量版)
+    用于 execute(task, context) 方法的返回值。
+    比 AgentResponse 更简洁，适合内部调用。
+    """
+    success: bool
+    output: any = None
+    error: str = ""
+    metadata: dict = field(default_factory=dict)
+
 class BaseAgent(ABC):
     """
     Agent 抽象基类
@@ -82,6 +95,11 @@ class BaseAgent(ABC):
         return self.config.name
 
     @property
+    def description(self) -> str:
+        """Agent 描述"""
+        return self.config.extra.get("description", f"{self.config.name} agent")
+
+    @property
     def status(self) -> AgentStatus:
         return self._status
 
@@ -99,6 +117,26 @@ class BaseAgent(ABC):
     def get_capabilities(self) -> list[str]:
         """返回能力标签列表"""
         ...
+    async def execute(self, task: str, context: dict | None = None) -> "AgentResult":
+        """
+        执行任务的统一入口
+        Args:
+            task: 任务描述文本
+            context: 上下文信息
+        Returns:
+            AgentResult
+        """
+        try:
+            response = await self.execute_task({"task": task, "context": context or {}})
+            return AgentResult(
+                success=response.success,
+                output=response.data,
+                error=response.error,
+                metadata=response.metadata,
+            )
+        except Exception as e:  # noqa: BLE001 — execute wraps all errors
+            return AgentResult(success=False, error=str(e))
+
 
     async def initialize(self):
         """初始化"""

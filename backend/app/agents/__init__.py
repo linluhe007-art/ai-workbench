@@ -1,6 +1,7 @@
 from app.agents.base import (
     AgentConfig,
     AgentResponse,
+    AgentResult,
     AgentStatus,
     AgentType,
     BaseAgent,
@@ -9,10 +10,12 @@ from app.agents.base import (
     KnowledgeAgent,
     ResearchAgent,
 )
+from app.agents.registry import AgentRegistry, registry
 
 __all__ = [
     "AgentConfig",
     "AgentResponse",
+    "AgentResult",
     "AgentStatus",
     "AgentType",
     "BaseAgent",
@@ -20,4 +23,6 @@ __all__ = [
     "ContentAgent",
     "KnowledgeAgent",
     "ResearchAgent",
+    "AgentRegistry",
+    "registry",
 ]

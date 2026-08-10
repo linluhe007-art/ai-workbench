@@ -154,7 +154,7 @@ class PipelineExecutor:
         started_at = datetime.now(timezone.utc)
 
         try:
-            output = await agent.execute(step)
+            output = await agent.execute_step(step)
             completed_at = datetime.now(timezone.utc)
             duration = int((completed_at - started_at).total_seconds() * 1000)
 

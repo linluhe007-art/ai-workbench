@@ -15,6 +15,8 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from enum import Enum
 
+# AgentContext defined in context.py to avoid circular imports
+
 
 class AgentStatus(str, Enum):
     ONLINE = "online"
@@ -136,6 +138,30 @@ class BaseAgent(ABC):
             )
         except Exception as e:  # noqa: BLE001 — execute wraps all errors
             return AgentResult(success=False, error=str(e))
+    async def execute_step(self, step: "TaskStep", context: "AgentContext | None" = None) -> dict:
+        """
+        Pipeline 执行入口 (带上下文)
+        默认实现：调用 execute_task() 并提取 data。
+        子类可覆盖此方法以直接访问 AgentContext。
+        """
+        from app.agents.context import AgentContext
+        ctx = context or AgentContext()
+        task_input = {
+            "task": step.description,
+            "context": {
+                "step_id": step.id,
+                "task_type": step.type.value,
+                "upstream_results": ctx.upstream_results,
+                "memory_summary": ctx.memory_summary,
+                "documents": ctx.documents,
+                "tags": ctx.tags,
+            },
+        }
+        response = await self.execute_task(task_input)
+        if not response.success:
+            raise RuntimeError(response.error or f"Agent {self.id} execute_task failed")
+        return response.data
+
 
 
     async def initialize(self):

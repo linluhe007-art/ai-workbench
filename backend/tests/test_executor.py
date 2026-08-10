@@ -32,7 +32,7 @@ def _failing_agent(error_msg: str = "boom") -> MockAgent:
     """创建一个会抛异常的 Agent"""
 
     class _FailAgent(MockAgent):
-        async def execute_step(self, step: TaskStep) -> dict:
+        async def execute_step(self, step: TaskStep, context=None) -> dict:
             self._call_log.append({"step_id": step.id, "task_type": step.type.value, "description": step.description})
             raise RuntimeError(error_msg)
 

@@ -10,6 +10,7 @@ from app.agents.base import (
     KnowledgeAgent,
     ResearchAgent as BaseResearchAgent,
 )
+from app.agents.context import AgentContext
 from app.agents.registry import AgentRegistry, registry
 from app.agents.research_agent import ResearchAgent
 from app.agents.analysis_agent import AnalysisAgent
@@ -18,6 +19,7 @@ from app.agents.mock_agent import MockAgent
 
 __all__ = [
     "AgentConfig",
+    "AgentContext",
     "AgentResponse",
     "AgentResult",
     "AgentStatus",

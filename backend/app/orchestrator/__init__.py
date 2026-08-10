@@ -20,7 +20,7 @@ __all__ = [
     "LLMProvider",
     "LLMResponse",
     "LLMTool",
-    "MockLLMProvider",
+    "MockLLMProvider", "DeepSeekProvider",
     "Orchestrator",
     "OrchestratorResult",
     "StepResult",

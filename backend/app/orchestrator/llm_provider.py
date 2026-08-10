@@ -145,3 +145,66 @@ class MockLLMProvider(LLMProvider):
 
     def is_available(self) -> bool:
         return True
+class DeepSeekProvider(LLMProvider):
+    """
+    DeepSeek LLM Provider
+    通过 OpenAI 兼容 API 调用 DeepSeek 模型。
+    API 文档: https://platform.deepseek.com/api-docs
+    """
+
+    def __init__(self, api_key: str, base_url: str = "https://api.deepseek.com", default_model: str = "deepseek-chat"):
+        self.api_key = api_key
+        self.base_url = base_url.rstrip("/")
+        self.default_model = default_model
+
+    async def chat(
+        self,
+        messages: list[LLMMessage],
+        model: str | None = None,
+        temperature: float = 0.7,
+        max_tokens: int = 4096,
+        tools: list[LLMTool] | None = None,
+        **kwargs: Any,
+    ) -> LLMResponse:
+        import httpx
+
+        payload: dict[str, Any] = {
+            "model": model or self.default_model,
+            "messages": [{"role": m.role.value, "content": m.content} for m in messages],
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        }
+        if tools:
+            payload["tools"] = [t.to_dict() for t in tools]
+
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json",
+        }
+
+        async with httpx.AsyncClient(timeout=120) as client:
+            resp = await client.post(
+                f"{self.base_url}/chat/completions",
+                json=payload,
+                headers=headers,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+        choice = data["choices"][0]
+        usage = data.get("usage", {})
+
+        return LLMResponse(
+            content=choice["message"].get("content", ""),
+            model=data.get("model", model or self.default_model),
+            tokens_used=usage.get("total_tokens", 0),
+            finish_reason=choice.get("finish_reason", "stop"),
+            tool_calls=choice["message"].get("tool_calls", []),
+            metadata={"provider": "deepseek"},
+        )
+
+    def get_model_name(self) -> str:
+        return self.default_model
+
+    def is_available(self) -> bool:
+        return bool(self.api_key)

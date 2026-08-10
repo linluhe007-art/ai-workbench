@@ -68,7 +68,7 @@ def load_llm_config(config_path: str | Path | None = None) -> LLMConfig:
 def create_llm_provider(config: LLMConfig | None = None):
     """
     根据配置创建 LLM Provider 实例
-    当前只有 Mock，Phase 3 接入真实 Provider。
+    支持: mock, deepseek (后续扩展 openai/ollama/claude/gemini)
     """
     if config is None:
         config = load_llm_config()
@@ -76,7 +76,15 @@ def create_llm_provider(config: LLMConfig | None = None):
     if config.provider == "mock":
         from app.orchestrator.llm_provider import MockLLMProvider
         return MockLLMProvider(default_model=config.model)
-    else:
-        logger.warning("Unknown LLM provider, falling back to mock", provider=config.provider)
-        from app.orchestrator.llm_provider import MockLLMProvider
-        return MockLLMProvider(default_model="mock-llm-v1")
+
+    if config.provider == "deepseek":
+        from app.orchestrator.llm_provider import DeepSeekProvider
+        return DeepSeekProvider(
+            api_key=config.api_key,
+            base_url=config.api_base or "https://api.deepseek.com",
+            default_model=config.model or "deepseek-chat",
+        )
+
+    logger.warning("Unknown LLM provider, falling back to mock", provider=config.provider)
+    from app.orchestrator.llm_provider import MockLLMProvider
+    return MockLLMProvider(default_model="mock-llm-v1")

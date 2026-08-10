@@ -8,9 +8,13 @@ from app.agents.base import (
     ChatAgent,
     ContentAgent,
     KnowledgeAgent,
-    ResearchAgent,
+    ResearchAgent as BaseResearchAgent,
 )
 from app.agents.registry import AgentRegistry, registry
+from app.agents.research_agent import ResearchAgent
+from app.agents.analysis_agent import AnalysisAgent
+from app.agents.writing_agent import WritingAgent
+from app.agents.mock_agent import MockAgent
 
 __all__ = [
     "AgentConfig",
@@ -19,10 +23,14 @@ __all__ = [
     "AgentStatus",
     "AgentType",
     "BaseAgent",
+    "BaseResearchAgent",
     "ChatAgent",
     "ContentAgent",
     "KnowledgeAgent",
-    "ResearchAgent",
     "AgentRegistry",
     "registry",
+    "ResearchAgent",
+    "AnalysisAgent",
+    "WritingAgent",
+    "MockAgent",
 ]

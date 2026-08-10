@@ -18,6 +18,40 @@ class ToolResult:
     metadata: dict = field(default_factory=dict)
 
 
+
+@dataclass
+class ToolCall:
+    """
+    LLM 返回的工具调用请求
+    对应 OpenAI function calling 的 tool_call 结构。
+    """
+    id: str                        # 调用 ID (用于回传结果)
+    name: str                      # 工具名称
+    arguments: dict = field(default_factory=dict)  # 工具参数
+
+    @classmethod
+    def from_llm_dict(cls, data: dict) -> "ToolCall":
+        """
+        从 LLM 响应的 tool_call dict 解析
+        支持 OpenAI 格式:
+        {"id": "...", "function": {"name": "...", "arguments": "{...}"}}
+        """
+        import json
+        func = data.get("function", {})
+        raw_args = func.get("arguments", "{}")
+        if isinstance(raw_args, str):
+            try:
+                args = json.loads(raw_args)
+            except (json.JSONDecodeError, TypeError):
+                args = {}
+        else:
+            args = raw_args if isinstance(raw_args, dict) else {}
+        return cls(
+            id=data.get("id", ""),
+            name=func.get("name", ""),
+            arguments=args,
+        )
+
 class BaseTool(ABC):
     """
     Tool 抽象基类

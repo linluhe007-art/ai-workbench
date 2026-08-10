@@ -93,6 +93,7 @@ class BaseAgent(ABC):
     def __init__(self, config: AgentConfig):
         self.config = config
         self.llm_provider: "LLMProvider | None" = config.extra.pop("llm_provider", None)
+        self._tool_registry = None
         self._status = AgentStatus.OFFLINE
 
     @property
@@ -212,6 +213,103 @@ class BaseAgent(ABC):
         if not response.success:
             raise RuntimeError(response.error or f"Agent {self.id} execute_task failed")
         return response.data
+    async def run_with_tools(
+        self,
+        prompt: str,
+        context: dict | None = None,
+        max_tool_rounds: int = 5,
+    ) -> "AgentResult":
+        """
+        LLM + Tool Calling 循环
+        流程: LLM 生成 → 检测 tool_calls → 执行工具 → 结果回传 LLM → 继续生成
+        Args:
+            prompt: 用户提示
+            context: 上下文 (含 memory 等)
+            max_tool_rounds: 最大工具调用轮数 (防无限循环)
+        Returns:
+            AgentResult (最终 LLM 文本输出)
+        """
+        from app.orchestrator.llm_provider import LLMMessage, LLMRole
+        from app.tools.executor import ToolExecutor
+
+        # 无 LLM Provider 时 fallback 到 execute_task
+        if not self.llm_provider:
+            response = await self.execute_task({"task": prompt, "context": context or {}})
+            return AgentResult(
+                success=response.success,
+                output=response.data,
+                error=response.error,
+            )
+
+        # 构建初始消息
+        sys_parts = [f"你是 {self.name} Agent。{self.description}"]
+        if context:
+            mem = context.get("memory_summary", "")
+            if mem:
+                sys_parts.append(f"知识库参考：\n{mem[:2000]}")
+        messages = [
+            LLMMessage(role=LLMRole.SYSTEM, content="\n\n".join(sys_parts)),
+            LLMMessage(role=LLMRole.USER, content=prompt),
+        ]
+
+        # 获取可用工具
+        tools = None
+        tool_executor = None
+        if self._tool_registry and len(self._tool_registry) > 0:
+            from app.orchestrator.llm_provider import LLMTool
+            tools = [
+                LLMTool(
+                    name=t.name,
+                    description=t.description,
+                    parameters=t._parameters_schema(),
+                )
+                for t in self._tool_registry._tools.values()
+            ]
+            tool_executor = ToolExecutor(self._tool_registry)
+
+        # Tool calling 循环
+        for _ in range(max_tool_rounds):
+            resp = await self.llm_provider.chat(messages=messages, tools=tools)
+
+            # 无 tool_calls → 返回最终文本
+            if not resp.tool_calls or resp.finish_reason != "tool_calls":
+                return AgentResult(
+                    success=True,
+                    output={"response": resp.content, "model": resp.model, "tokens_used": resp.tokens_used},
+                    metadata={"provider": "llm", "tool_rounds": _},
+                )
+
+            # 有 tool_calls → 解析并执行
+            from app.tools.base import ToolCall
+            parsed_calls = [ToolCall.from_llm_dict(tc) for tc in resp.tool_calls]
+
+            # 添加 assistant 消息 (含 tool_calls)
+            messages.append(LLMMessage(
+                role=LLMRole.ASSISTANT,
+                content=resp.content or "",
+            ))
+
+            # 执行工具并回传结果
+            if tool_executor:
+                report = await tool_executor.execute_all(parsed_calls)
+                for msg in report.to_llm_messages():
+                    messages.append(LLMMessage(
+                        role=LLMRole.TOOL,
+                        content=msg["content"],
+                        tool_call_id=msg.get("tool_call_id", ""),
+                    ))
+
+        # 超过最大轮数
+        return AgentResult(
+            success=True,
+            output={"response": messages[-1].content if messages else "", "note": "max tool rounds reached"},
+        )
+
+    def set_tool_registry(self, registry: "ToolRegistry"):
+        """注入 ToolRegistry"""
+        self._tool_registry = registry
+
+
 
 
 

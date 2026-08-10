@@ -1,12 +1,17 @@
-from app.tools.base import BaseTool, ToolResult
+from app.tools.base import BaseTool, ToolResult, ToolCall
 from app.tools.registry import ToolRegistry, tool_registry
+from app.tools.executor import ToolExecutor, ToolCallResult, ToolExecutionReport
 from app.tools.memory_tool import MemoryTool
 
 __all__ = [
     "BaseTool",
     "ToolResult",
+    "ToolCall",
     "ToolRegistry",
     "tool_registry",
+    "ToolExecutor",
+    "ToolCallResult",
+    "ToolExecutionReport",
     "MemoryTool",
 ]
 

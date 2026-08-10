@@ -17,6 +17,12 @@ from enum import Enum
 
 # AgentContext defined in context.py to avoid circular imports
 
+# LLM types (lazy import to avoid circular)
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.orchestrator.llm_provider import LLMProvider, LLMResponse
+
 
 class AgentStatus(str, Enum):
     ONLINE = "online"
@@ -86,6 +92,7 @@ class BaseAgent(ABC):
 
     def __init__(self, config: AgentConfig):
         self.config = config
+        self.llm_provider: "LLMProvider | None" = config.extra.pop("llm_provider", None)
         self._status = AgentStatus.OFFLINE
 
     @property
@@ -119,6 +126,50 @@ class BaseAgent(ABC):
     def get_capabilities(self) -> list[str]:
         """返回能力标签列表"""
         ...
+    def set_llm_provider(self, provider: "LLMProvider"):
+        """运行时注入 LLM Provider"""
+        self.llm_provider = provider
+
+    async def call_llm(
+        self,
+        prompt: str,
+        system: str = "",
+        context: dict | None = None,
+        temperature: float = 0.7,
+        max_tokens: int = 4096,
+    ) -> "LLMResponse | None":
+        """
+        调用 LLM 的便捷方法
+        自动构建 system prompt (含 Agent 身份 + context)。
+        无 LLM Provider 时返回 None，调用方可自行 fallback。
+        """
+        if not self.llm_provider:
+            return None
+
+        from app.orchestrator.llm_provider import LLMMessage, LLMRole
+
+        messages: list[LLMMessage] = []
+
+        # 构建 system prompt
+        sys_parts = [f"你是 {self.name} Agent。{self.description}"]
+        if context:
+            mem_summary = context.get("memory_summary", "")
+            if mem_summary:
+                sys_parts.append(f"以下是知识库参考内容：\n{mem_summary[:2000]}")
+            tags = context.get("tags", [])
+            if tags:
+                sys_parts.append(f"相关标签：{', '.join(tags[:10])}")
+        system_prompt = "\n\n".join(sys_parts)
+        messages.append(LLMMessage(role=LLMRole.SYSTEM, content=system_prompt))
+        messages.append(LLMMessage(role=LLMRole.USER, content=prompt))
+
+        return await self.llm_provider.chat(
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+
+
     async def execute(self, task: str, context: dict | None = None) -> "AgentResult":
         """
         执行任务的统一入口

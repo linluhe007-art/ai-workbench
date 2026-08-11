@@ -22,6 +22,8 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from app.orchestrator.llm_provider import LLMProvider, LLMResponse
+    from app.agents.message_bus import MessageBus
+    from app.workspace.manager import WorkspaceManager
 
 
 class AgentStatus(str, Enum):
@@ -94,6 +96,8 @@ class BaseAgent(ABC):
         self.config = config
         self.llm_provider: "LLMProvider | None" = config.extra.pop("llm_provider", None)
         self._tool_registry = None
+        self._message_bus = None
+        self._workspace_manager = None
         self._status = AgentStatus.OFFLINE
 
     @property
@@ -308,10 +312,91 @@ class BaseAgent(ABC):
     def set_tool_registry(self, registry: "ToolRegistry"):
         """注入 ToolRegistry"""
         self._tool_registry = registry
+    def set_message_bus(self, bus: "MessageBus"):
+        """注入 MessageBus 实例"""
+        self._message_bus = bus
+
+    async def send_message(self, receiver: str, content: dict) -> None:
+        """
+        通过 MessageBus 发送消息给另一个 Agent。
+        Args:
+            receiver: 接收方 Agent ID
+            content: 消息内容（dict）
+        Raises:
+            RuntimeError: 如果未设置 MessageBus
+        """
+        if not self._message_bus:
+            raise RuntimeError("MessageBus not set. Call set_message_bus() first.")
+        from app.agents.message import AgentMessage
+        msg = AgentMessage(
+            sender=self.id,
+            receiver=receiver,
+            content=content,
+            message_type="data",
+        )
+        await self._message_bus.send(msg)
+
+    async def receive_messages(self) -> list:
+        """
+        通过 MessageBus 接收本 Agent 的所有待处理消息。
+        Returns:
+            AgentMessage 列表
+        Raises:
+            RuntimeError: 如果未设置 MessageBus
+        """
+        if not self._message_bus:
+            raise RuntimeError("MessageBus not set. Call set_message_bus() first.")
+        return await self._message_bus.receive(self.id)
 
 
 
 
+
+
+    # === Workspace 集成 ===
+
+    def set_workspace(self, manager: "WorkspaceManager"):
+        """注入 WorkspaceManager"""
+        self._workspace_manager = manager
+
+    @property
+    def workspace(self) -> "WorkspaceManager | None":
+        """访问 WorkspaceManager"""
+        return self._workspace_manager
+
+    async def save_artifact(
+        self,
+        workspace_id: str,
+        name: str,
+        content: any,
+        item_type: str = "text",
+        metadata: dict | None = None,
+    ) -> "WorkspaceItem":
+        """
+        保存产物到工作空间。
+        Raises:
+            RuntimeError: 如果未设置 WorkspaceManager
+        """
+        if not self._workspace_manager:
+            raise RuntimeError("WorkspaceManager not set. Call set_workspace() first.")
+        return self._workspace_manager.save_artifact(
+            workspace_id=workspace_id,
+            owner=self.id,
+            name=name,
+            content=content,
+            item_type=item_type,
+            metadata=metadata,
+        )
+
+    async def get_artifact(self, workspace_id: str, item_id: str):
+        """
+        从工作空间获取产物。
+        Raises:
+            RuntimeError: 如果未设置 WorkspaceManager
+        """
+        if not self._workspace_manager:
+            raise RuntimeError("WorkspaceManager not set. Call set_workspace() first.")
+        return self._workspace_manager.get_item(workspace_id, item_id)
 
     async def initialize(self):
         """初始化"""

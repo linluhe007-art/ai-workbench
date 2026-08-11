@@ -1,16 +1,21 @@
 """
 AgentRuntime — 多 Agent 运行时调度。
 管理 Agent 生命周期、状态、Agent 间消息传递。
+Phase 3.9.1: 集成 MessageBus，支持 Agent 间异步消息通信。
 """
 
 import asyncio
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
 from app.agents.base import BaseAgent, AgentResult
+from app.agents.message import AgentMessage
 from app.utils.logger import get_logger
+
+if TYPE_CHECKING:
+    from app.agents.message_bus import MessageBus
 
 logger = get_logger(__name__)
 
@@ -22,29 +27,6 @@ class AgentState(str, Enum):
     WAITING = "waiting"
     COMPLETED = "completed"
     FAILED = "failed"
-
-
-@dataclass
-class AgentMessage:
-    """
-    Agent 间消息。
-    用于在 Agent 之间传递上下文和结果。
-    """
-    sender: str
-    receiver: str
-    content: Any
-    msg_type: str = "data"
-    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
-    metadata: dict = field(default_factory=dict)
-
-    def to_dict(self) -> dict:
-        return {
-            "sender": self.sender,
-            "receiver": self.receiver,
-            "content": self.content,
-            "msg_type": self.msg_type,
-            "timestamp": self.timestamp.isoformat(),
-        }
 
 
 @dataclass
@@ -66,13 +48,32 @@ class AgentRuntime:
     - Agent 注册与获取
     - Agent 生命周期管理 (initialize / shutdown)
     - Agent 状态追踪
-    - Agent 间消息路由
+    - Agent 间消息路由（内置队列 + 可选 MessageBus）
     """
 
     def __init__(self):
         self._agents: dict[str, BaseAgent] = {}
         self._states: dict[str, AgentTaskRecord] = {}
         self._message_queue: dict[str, list[AgentMessage]] = {}
+        self._message_bus: "MessageBus | None" = None
+
+    # === MessageBus 集成 ===
+
+    def set_message_bus(self, bus: "MessageBus"):
+        """
+        注入 MessageBus 实例。
+        设置后，所有 Agent 的消息操作将通过 MessageBus 进行。
+        同时自动将 MessageBus 注入到所有已注册 Agent。
+        """
+        self._message_bus = bus
+        for agent in self._agents.values():
+            agent.set_message_bus(bus)
+            bus.register_agent(agent.id)
+        logger.info("MessageBus set on runtime", agents=len(self._agents))
+
+    @property
+    def message_bus(self) -> "MessageBus | None":
+        return self._message_bus
 
     # === Agent 注册 ===
 
@@ -81,6 +82,10 @@ class AgentRuntime:
         self._agents[agent.id] = agent
         self._states[agent.id] = AgentTaskRecord(agent_id=agent.id)
         self._message_queue[agent.id] = []
+        # 如果已有 MessageBus，自动注册新 Agent
+        if self._message_bus:
+            self._message_bus.register_agent(agent.id)
+            agent.set_message_bus(self._message_bus)
         logger.info("Agent registered in runtime", agent_id=agent.id)
 
     def get(self, agent_id: str) -> BaseAgent | None:
@@ -96,6 +101,32 @@ class AgentRuntime:
             info["state"] = record.state.value if record else "unknown"
             result.append(info)
         return result
+
+    def get_agent_status(self, agent_id: str) -> dict:
+        """
+        获取指定 Agent 的运行状态详情。
+        Returns:
+            {"agent_id", "state", "task", "started_at", "completed_at", "error"}
+        """
+        record = self._states.get(agent_id)
+        if not record:
+            return {"agent_id": agent_id, "state": "unknown"}
+        return {
+            "agent_id": record.agent_id,
+            "state": record.state.value,
+            "task": record.task,
+            "started_at": record.started_at.isoformat() if record.started_at else None,
+            "completed_at": record.completed_at.isoformat() if record.completed_at else None,
+            "error": record.error,
+        }
+
+    def list_running_agents(self) -> list[dict]:
+        """列出所有状态为 RUNNING 的 Agent"""
+        return [
+            self.get_agent_status(aid)
+            for aid, rec in self._states.items()
+            if rec.state == AgentState.RUNNING
+        ]
 
     # === 生命周期管理 ===
 
@@ -141,16 +172,16 @@ class AgentRuntime:
     def get_record(self, agent_id: str) -> AgentTaskRecord | None:
         return self._states.get(agent_id)
 
-    # === 消息路由 ===
+    # === 消息路由（内置队列，兼容旧接口） ===
 
     def send_message(self, msg: AgentMessage):
-        """发送 Agent 间消息"""
+        """发送 Agent 间消息（内置队列）"""
         if msg.receiver in self._message_queue:
             self._message_queue[msg.receiver].append(msg)
-            logger.debug("Message sent", sender=msg.sender, receiver=msg.receiver, type=msg.msg_type)
+            logger.debug("Message sent", sender=msg.sender, receiver=msg.receiver, type=msg.message_type)
 
     def receive_messages(self, agent_id: str) -> list[AgentMessage]:
-        """接收并清空指定 Agent 的消息队列"""
+        """接收并清空指定 Agent 的消息队列（内置队列）"""
         messages = self._message_queue.get(agent_id, [])
         self._message_queue[agent_id] = []
         return messages
@@ -165,12 +196,6 @@ class AgentRuntime:
         """
         执行单个 Agent 任务，自动管理状态。
         使用 execute_step() 以保持与 PipelineExecutor 一致的执行路径。
-        Args:
-            agent_id: Agent ID
-            task: 任务描述
-            context: 上下文
-        Returns:
-            AgentResult
         """
         from app.orchestrator.planner import TaskStep, TaskType
 
@@ -187,10 +212,7 @@ class AgentRuntime:
             )
             output = await agent.execute_step(step, context)
 
-            result = AgentResult(
-                success=True,
-                output=output,
-            )
+            result = AgentResult(success=True, output=output)
             self.set_state(agent_id, AgentState.COMPLETED)
 
             record = self._states.get(agent_id)

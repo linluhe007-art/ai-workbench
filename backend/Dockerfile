@@ -2,13 +2,13 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements.txt requirements-dev.txt ./
 RUN pip install \
     --no-cache-dir \
     --no-compile \
     --default-timeout=300 \
     -i https://pypi.tuna.tsinghua.edu.cn/simple \
-    -r requirements.txt
+    -r requirements-dev.txt
 
 COPY . .
 

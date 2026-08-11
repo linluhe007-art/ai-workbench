@@ -2,6 +2,7 @@
 AgentRuntime — 多 Agent 运行时调度。
 管理 Agent 生命周期、状态、Agent 间消息传递。
 Phase 3.9.1: 集成 MessageBus，支持 Agent 间异步消息通信。
+Phase 3.18: 集成 TraceCollector，记录 agent 执行开始/结束/异常事件。
 """
 
 import asyncio
@@ -49,13 +50,21 @@ class AgentRuntime:
     - Agent 生命周期管理 (initialize / shutdown)
     - Agent 状态追踪
     - Agent 间消息路由（内置队列 + 可选 MessageBus）
+    - Phase 3.18: 可选 TraceCollector 追踪
     """
 
-    def __init__(self):
+    def __init__(self, trace_collector: "TraceCollector | None" = None):
         self._agents: dict[str, BaseAgent] = {}
         self._states: dict[str, AgentTaskRecord] = {}
         self._message_queue: dict[str, list[AgentMessage]] = {}
         self._message_bus: "MessageBus | None" = None
+        self._trace = trace_collector
+
+    # === TraceCollector 集成 ===
+
+    def set_trace_collector(self, collector: "TraceCollector"):
+        """注入 TraceCollector 实例"""
+        self._trace = collector
 
     # === MessageBus 集成 ===
 
@@ -195,7 +204,7 @@ class AgentRuntime:
     async def run_agent(self, agent_id: str, task: str, context: dict | None = None) -> AgentResult:
         """
         执行单个 Agent 任务，自动管理状态。
-        使用 execute_step() 以保持与 PipelineExecutor 一致的执行路径。
+        Phase 3.18: 集成 TraceCollector 记录 start/end/error。
         """
         from app.orchestrator.planner import TaskStep, TaskType
 
@@ -203,14 +212,24 @@ class AgentRuntime:
         if not agent:
             return AgentResult(success=False, error=f"Agent not found: {agent_id}")
 
+        trace_id = self._trace.generate_trace_id() if self._trace else ""
+        task_id = agent_id
+
         self.set_state(agent_id, AgentState.RUNNING)
+
+        # Trace: start
+        if self._trace:
+            self._trace.start(trace_id, task_id, "agent", metadata={"agent_id": agent_id, "task": task})
+
         try:
             step = TaskStep(
                 id=agent_id,
                 type=TaskType.CUSTOM,
                 description=task,
             )
+            started = datetime.now(timezone.utc)
             output = await agent.execute_step(step, context)
+            duration = int((datetime.now(timezone.utc) - started).total_seconds() * 1000)
 
             result = AgentResult(success=True, output=output)
             self.set_state(agent_id, AgentState.COMPLETED)
@@ -220,9 +239,18 @@ class AgentRuntime:
                 record.result = output
                 record.task = task
 
+            # Trace: end
+            if self._trace:
+                self._trace.end(trace_id, task_id, "agent", duration_ms=duration, metadata={"agent_id": agent_id, "success": True})
+
             return result
         except Exception as e:  # noqa: BLE001 runtime wraps errors
             self.set_state(agent_id, AgentState.FAILED)
+
+            # Trace: error
+            if self._trace:
+                self._trace.error(trace_id, task_id, "agent", error=str(e), metadata={"agent_id": agent_id})
+
             return AgentResult(success=False, error=str(e))
 
     async def run_parallel(self, tasks: list[tuple[str, str]]) -> dict[str, AgentResult]:

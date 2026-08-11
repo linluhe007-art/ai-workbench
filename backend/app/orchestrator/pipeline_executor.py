@@ -3,6 +3,7 @@ Pipeline 执行引擎
 接收 TaskPlan，按 DAG 依赖顺序执行所有步骤。
 支持 Memory 上下文注入（执行前查询）和结果回写（执行后存储）。
 Phase 3.8 升级：支持同层并行执行（asyncio.gather）。
+Phase 3.18: 集成 TraceCollector，记录 step 开始/结束/失败事件。
 """
 
 import asyncio
@@ -20,6 +21,7 @@ from app.utils.logger import get_logger
 if TYPE_CHECKING:
     from app.agents.base import BaseAgent
     from app.memory.service import MemoryService
+    from app.memory.experience import ExperienceMemory
 
 logger = get_logger(__name__)
 
@@ -74,21 +76,37 @@ class PipelineExecutor:
     按 DAG 拓扑顺序执行 TaskPlan 中的所有步骤。
     Phase 3.8: 同层无依赖步骤通过 asyncio.gather 并行执行。
     支持 Memory 上下文注入和结果回写。
+    Phase 3.18: 可选 TraceCollector 追踪。
     """
 
     def __init__(
         self,
         agent_map: dict[str, "BaseAgent | MockAgent"] | None = None,
         memory_service: "MemoryService | None" = None,
+        experience: "ExperienceMemory | None" = None,
+        trace_collector: "TraceCollector | None" = None,
     ):
         self._agent_map = agent_map or {}
         self._memory = memory_service
+        self._experience = experience
+        self._trace = trace_collector
+
+    def set_trace_collector(self, collector: "TraceCollector"):
+        """注入 TraceCollector 实例"""
+        self._trace = collector
 
     async def execute(self, plan: TaskPlan) -> ExecutionResult:
         """执行完整 TaskPlan（DAG 并行调度）"""
         started_at = datetime.now(timezone.utc)
         results: dict[str, StepResult] = {}
         memory_contexts: dict[str, AgentContext] = {}
+
+        trace_id = self._trace.generate_trace_id() if self._trace else ""
+        task_id = plan.intent
+
+        # Trace: pipeline start
+        if self._trace:
+            self._trace.start(trace_id, task_id, "executor", metadata={"intent": plan.intent, "steps": len(plan.steps)})
 
         levels = self._topological_levels(plan.steps)
         logger.info(
@@ -122,7 +140,7 @@ class PipelineExecutor:
                 upstream_output = self._collect_upstream(step, results)
                 ctx = await self._build_context(step, plan, upstream_output)
                 memory_contexts[step.id] = ctx
-                result = await self._execute_step(step, ctx)
+                result = await self._execute_step(step, ctx, trace_id, task_id)
                 results[step.id] = result
                 if result.status == StepStatus.SUCCESS:
                     await self._write_back_memory(step, result)
@@ -131,86 +149,134 @@ class PipelineExecutor:
                 logger.info(
                     "Parallel execution",
                     level=level_idx,
-                    step_ids=[s.id for s in runnable],
+                    steps=[s.id for s in runnable],
                 )
-                parallel_results = await asyncio.gather(
-                    *[self._execute_with_context(step, plan, results) for step in runnable],
-                    return_exceptions=True,
-                )
-                for step, result in zip(runnable, parallel_results):
-                    if isinstance(result, Exception):
-                        results[step.id] = StepResult(
-                            step_id=step.id,
-                            status=StepStatus.FAILED,
-                            agent_id="",
-                            error=str(result),
-                        )
-                    else:
-                        step_result, ctx = result
-                        results[step.id] = step_result
-                        memory_contexts[step.id] = ctx
-                        if step_result.status == StepStatus.SUCCESS:
-                            await self._write_back_memory(step, step_result)
+                coros = []
+                for step in runnable:
+                    upstream_output = self._collect_upstream(step, results)
+                    ctx = await self._build_context(step, plan, upstream_output)
+                    memory_contexts[step.id] = ctx
+                    coros.append(self._execute_step(step, ctx, trace_id, task_id))
+
+                level_results = await asyncio.gather(*coros)
+                for step, result in zip(runnable, level_results):
+                    results[step.id] = result
+                    if result.status == StepStatus.SUCCESS:
+                        await self._write_back_memory(step, result)
 
         completed_at = datetime.now(timezone.utc)
-        duration_ms = int((completed_at - started_at).total_seconds() * 1000)
+        duration = int((completed_at - started_at).total_seconds() * 1000)
+        status = self._compute_status(results)
 
-        overall = self._compute_status(results)
+        # Trace: pipeline end
+        if self._trace:
+            self._trace.end(
+                trace_id, task_id, "executor",
+                duration_ms=duration,
+                metadata={"status": status, "success_count": sum(1 for r in results.values() if r.status == StepStatus.SUCCESS)},
+            )
+
+        logger.info(
+            "Pipeline execution completed",
+            intent=plan.intent,
+            status=status,
+            duration_ms=duration,
+        )
 
         return ExecutionResult(
             plan_intent=plan.intent,
             step_results=results,
-            status=overall,
+            status=status,
             memory_contexts=memory_contexts,
             started_at=started_at,
             completed_at=completed_at,
-            duration_ms=duration_ms,
+            duration_ms=duration,
         )
 
-    async def _execute_with_context(
-        self, step: TaskStep, plan: TaskPlan, results: dict[str, StepResult]
-    ) -> tuple[StepResult, AgentContext]:
-        """执行单个步骤并返回结果和上下文（用于并行调度）"""
-        upstream_output = self._collect_upstream(step, results)
-        ctx = await self._build_context(step, plan, upstream_output)
-        result = await self._execute_step(step, ctx)
-        return result, ctx
+    async def execute_with_recovery(self, plan: TaskPlan, max_retries: int = 1) -> ExecutionResult:
+        """
+        带恢复的执行：先执行，再分析反馈。
+        如果失败可重试，自动选择替代 Agent。
+        Args:
+            plan: TaskPlan
+            max_retries: 最大重试次数 (0=不重试, 1=默认重试一次)
+        """
+        from app.execution.feedback import ExecutionFeedbackManager
+        from app.execution.recovery import ExecutionRecoveryManager
+
+        current_plan = plan
+        last_result = None
+
+        for attempt in range(max_retries + 1):
+            result = await self.execute(current_plan)
+            last_result = result
+            feedback = ExecutionFeedbackManager().analyze(result)
+
+            if feedback.success:
+                return result
+
+            # 已达最大重试次数
+            if attempt >= max_retries:
+                logger.info("Max retries reached", attempts=attempt + 1)
+                return result
+
+            # 尝试恢复
+            recovery = ExecutionRecoveryManager()
+            recovery_result = await recovery.recover(plan.intent, current_plan, result, feedback)
+
+            if not recovery_result.recovered:
+                logger.info("Recovery not possible, returning last result", action=recovery_result.action)
+                return result
+
+            # 可恢复：使用新 plan 或重试原 plan
+            if recovery_result.new_plan:
+                logger.info("Recovery: retrying with new plan", action=recovery_result.action, attempt=attempt + 1)
+                current_plan = recovery_result.new_plan
+            else:
+                logger.info("Recovery: retrying same plan", action=recovery_result.action, attempt=attempt + 1)
+                # current_plan 保持不变，直接重试
+
+        return last_result
 
     async def _build_context(
         self, step: TaskStep, plan: TaskPlan, upstream_output: dict
     ) -> AgentContext:
-        ctx = AgentContext(
-            upstream_results=upstream_output,
-            task_description=step.description,
-            agent_type=step.type.value,
+        """构建 AgentContext，注入 Memory + upstream"""
+        memory_docs = []
+        if self._memory:
+            try:
+                ctx = await self._memory.get_context(step.description)
+                memory_docs = ctx.get("documents", []) if isinstance(ctx, dict) else []
+            except Exception:  # noqa: BLE001 memory failure should not block execution
+                logger.warning("Memory context fetch failed", step=step.id)
+
+        return AgentContext(
+            task=step.description,
+            upstream=upstream_output,
+            memory=memory_docs,
+            metadata={"plan_intent": plan.intent, "step_id": step.id},
         )
 
-        if self._memory and plan.context_query:
-            try:
-                mem_ctx = self._memory.get_memory_context(
-                    plan.context_query, agent_type=step.type.value
-                )
-                ctx.documents = mem_ctx.documents
-                ctx.tags = mem_ctx.tags
-                ctx.related_links = mem_ctx.related_links
-                ctx.memory_summary = mem_ctx.summary
-            except Exception as e:  # noqa: BLE001 memory failure is non-fatal
-                logger.warning("Memory query failed for step", step_id=step.id, error=str(e))
-
-        return ctx
-
     async def _write_back_memory(self, step: TaskStep, result: StepResult):
-        if self._memory and result.output:
-            logger.info(
-                "Memory write-back",
-                step_id=step.id,
-                agent_id=result.agent_id,
-                output_keys=list(result.output.keys()) if isinstance(result.output, dict) else [],
-            )
+        """执行成功后将结果回写到 Memory/Experience"""
+        if self._experience:
+            try:
+                self._experience.record_experience(
+                    task_pattern=step.description,
+                    agents=[result.agent_id],
+                    result={"success": True, "output_keys": list(result.output.keys()) if isinstance(result.output, dict) else []},
+                    metadata={"step_id": step.id, "duration_ms": result.duration_ms},
+                )
+            except Exception:  # noqa: BLE001 write-back failure is non-fatal
+                logger.warning("Memory write-back failed", step=step.id)
 
-    async def _execute_step(self, step: TaskStep, ctx: AgentContext) -> StepResult:
+    async def _execute_step(self, step: TaskStep, ctx: AgentContext, trace_id: str = "", task_id: str = "") -> StepResult:
         agent = self._resolve_agent(step)
         started_at = datetime.now(timezone.utc)
+
+        # Trace: step start
+        if self._trace:
+            self._trace.start(trace_id, task_id, "executor", metadata={"step_id": step.id, "agent_id": agent.id})
 
         try:
             output = await agent.execute_step(step, ctx)
@@ -218,6 +284,10 @@ class PipelineExecutor:
             duration = int((completed_at - started_at).total_seconds() * 1000)
 
             logger.info("Step completed", step_id=step.id, agent=agent.id, duration_ms=duration)
+
+            # Trace: step end
+            if self._trace:
+                self._trace.end(trace_id, task_id, "executor", duration_ms=duration, metadata={"step_id": step.id, "agent_id": agent.id, "success": True})
 
             return StepResult(
                 step_id=step.id,
@@ -233,6 +303,10 @@ class PipelineExecutor:
             duration = int((completed_at - started_at).total_seconds() * 1000)
 
             logger.warning("Step failed", step_id=step.id, error=str(e))
+
+            # Trace: step error
+            if self._trace:
+                self._trace.error(trace_id, task_id, "executor", error=str(e), metadata={"step_id": step.id, "agent_id": agent.id})
 
             return StepResult(
                 step_id=step.id,

@@ -16,7 +16,7 @@ class MockAgent(BaseAgent):
     """
 
     def __init__(self, agent_id: str = "mock-agent", agent_type: AgentType = AgentType.CUSTOM):
-        config = AgentConfig(id=agent_id, name=f"Mock({agent_id})", type=agent_type)
+        config = AgentConfig(id=agent_id, name=f"Mock({agent_id})", type=agent_type, capabilities=["mock", "test"])
         super().__init__(config)
         self._status = AgentStatus.ONLINE
         self._responses: dict[str, dict] = {}  # step_id -> 预设响应
@@ -78,5 +78,3 @@ class MockAgent(BaseAgent):
     async def execute_task(self, task_input: dict) -> AgentResponse:
         return AgentResponse(success=True, data=task_input, agent_id=self.id)
 
-    def get_capabilities(self) -> list[str]:
-        return ["mock", "test"]

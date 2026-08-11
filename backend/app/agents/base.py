@@ -127,10 +127,9 @@ class BaseAgent(ABC):
         """执行结构化任务"""
         ...
 
-    @abstractmethod
     def get_capabilities(self) -> list[str]:
-        """返回能力标签列表"""
-        ...
+        """返回能力标签列表（默认读取 config.capabilities）"""
+        return self.config.capabilities
     def set_llm_provider(self, provider: "LLMProvider"):
         """运行时注入 LLM Provider"""
         self.llm_provider = provider

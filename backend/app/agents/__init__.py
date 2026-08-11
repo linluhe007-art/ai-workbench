@@ -11,6 +11,7 @@ from app.agents.base import (
     ResearchAgent as BaseResearchAgent,
 )
 from app.agents.context import AgentContext
+from app.agents.capability import CapabilityRegistry
 from app.agents.heartbeat import AgentHeartbeat
 from app.agents.lifecycle import AgentLifecycleManager, LifecycleState
 from app.agents.message import AgentMessage
@@ -24,6 +25,7 @@ from app.agents.runtime import AgentRuntime, AgentState
 
 __all__ = [
     "AgentConfig",
+    "CapabilityRegistry",
     "AgentContext",
     "AgentHeartbeat",
     "AgentLifecycleManager",

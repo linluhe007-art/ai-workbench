@@ -42,3 +42,6 @@ logs/
 
 # Uploads
 uploads/
+
+# Pip cache
+pip-cache/

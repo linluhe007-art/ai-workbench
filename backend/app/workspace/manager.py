@@ -119,3 +119,118 @@ class WorkspaceManager:
         """
         items = self.list_items(workspace_id)
         return [i for i in items if i.type == item_type]
+
+    def find_item_globally(self, item_id: str) -> tuple[str, WorkspaceItem] | None:
+        """Search all workspaces for an item by ID. Returns (workspace_id, item) or None."""
+        for ws_id, items in self._storage._store.items():
+            if item_id in items:
+                return (ws_id, items[item_id])
+        return None
+
+    def update_item_metadata(self, workspace_id: str, item_id: str, metadata: dict) -> WorkspaceItem | None:
+        """Merge new metadata fields into an existing item."""
+        item = self.get_item(workspace_id, item_id)
+        if item is None:
+            return None
+        item.metadata.update(metadata)
+        return item
+
+    def rename_item(self, workspace_id: str, item_id: str, new_name: str) -> WorkspaceItem | None:
+        """Rename an artifact. Returns updated item or None if not found."""
+        item = self.get_item(workspace_id, item_id)
+        if item is None:
+            return None
+        item.name = new_name
+        return item
+
+    def get_all_workspaces(self) -> list[str]:
+        """List all workspace IDs."""
+        return list(self._storage._store.keys())
+
+    def search_items(
+        self,
+        query: str | None = None,
+        artifact_type: str | None = None,
+        agent_id: str | None = None,
+        task_id: str | None = None,
+        workspace_id: str | None = None,
+        step_id: str | None = None,
+        created_after: object | None = None,
+        created_before: object | None = None,
+        sort_by: str = "created_at",
+        order: str = "desc",
+        limit: int = 50,
+        offset: int = 0,
+    ) -> tuple[list[dict], int]:
+        """Search artifacts across workspaces with filters, sorting, pagination."""
+        # Collect candidate items
+        candidates: list[tuple[str, WorkspaceItem]] = []
+
+        if workspace_id:
+            # Restrict to specific workspace
+            for item in self.list_items(workspace_id):
+                candidates.append((workspace_id, item))
+        elif task_id:
+            # task_id maps to workspace_id
+            for item in self.list_items(task_id):
+                candidates.append((task_id, item))
+        else:
+            # Search all workspaces
+            for ws_id in self.get_all_workspaces():
+                for item in self.list_items(ws_id):
+                    candidates.append((ws_id, item))
+
+        # Apply filters
+        results: list[tuple[str, WorkspaceItem]] = []
+        query_lower = query.lower() if query else None
+
+        for ws_id, item in candidates:
+            # Type filter
+            if artifact_type and item.type != artifact_type:
+                continue
+            # Agent filter
+            if agent_id:
+                item_agent = (item.metadata.get("created_by") or item.owner)
+                if item_agent != agent_id:
+                    continue
+            # Step filter
+            if step_id:
+                if item.metadata.get("step_id") != step_id:
+                    continue
+            # Date filters
+            if created_after and item.created_at < created_after:
+                continue
+            if created_before and item.created_at > created_before:
+                continue
+            # Text query
+            if query_lower:
+                name_match = query_lower in item.name.lower()
+                content_str = item.content if isinstance(item.content, str) else str(item.content)
+                content_match = query_lower in content_str.lower()
+                if not name_match and not content_match:
+                    continue
+            results.append((ws_id, item))
+
+        # Sort
+        def sort_key(entry: tuple[str, WorkspaceItem]):
+            _, item = entry
+            if sort_by == "name":
+                return item.name.lower()
+            elif sort_by == "type":
+                return item.type
+            else:  # created_at
+                return item.created_at.isoformat()
+
+        reverse = (order == "desc")
+        results.sort(key=sort_key, reverse=reverse)
+
+        total = len(results)
+        paginated = results[offset:offset + limit]
+
+        items_out = []
+        for ws_id, item in paginated:
+            d = item.to_dict()
+            d["workspace_id"] = ws_id
+            items_out.append(d)
+
+        return items_out, total

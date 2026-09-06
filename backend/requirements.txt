@@ -13,3 +13,4 @@ structlog==24.4.0
 python-multipart==0.0.20
 pyyaml>=6.0
 openai>=2.0.0
+psutil==5.9.8

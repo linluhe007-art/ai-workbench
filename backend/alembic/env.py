@@ -1,4 +1,4 @@
-﻿import asyncio
+import asyncio
 from logging.config import fileConfig
 
 from sqlalchemy import pool
@@ -8,18 +8,8 @@ from alembic import context
 from app.config import get_settings
 from app.database import Base
 
-# Import all models so Alembic can detect them
-from app.models import (  # noqa
-    agent,
-    content,
-    conversation,
-    crawler,
-    knowledge,
-    message,
-    platform,
-    task,
-    user,
-)
+# Import ORM models so Alembic can detect them
+import app.database.models  # noqa: F401
 
 config = context.config
 settings = get_settings()
@@ -32,6 +22,7 @@ target_metadata = Base.metadata
 
 
 def run_migrations_offline() -> None:
+    """Run migrations in 'offline' mode."""
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -50,6 +41,7 @@ def do_run_migrations(connection):
 
 
 async def run_async_migrations() -> None:
+    """Run migrations in 'online' mode with async engine."""
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
@@ -61,6 +53,7 @@ async def run_async_migrations() -> None:
 
 
 def run_migrations_online() -> None:
+    """Run migrations in 'online' mode."""
     asyncio.run(run_async_migrations())
 
 

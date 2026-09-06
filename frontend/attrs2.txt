@@ -1,0 +1,181 @@
+﻿E:\半自动工作台\frontend\src\pages\AgentDetail\AgentDetail.tsx:69:<Descriptions.Item label="Agent ID">
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:206:placeholder="Agent ID"
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:35:<Col span={6}><Card><Statistic title="Team Members" value={stats.active_members} prefix={<TeamOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:36:<Col span={6}><Card><Statistic title="Total Tasks" value={stats.total_tasks} prefix={<ThunderboltOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:37:<Col span={6}><Card><Statistic title="Successes" value={stats.total_success} prefix={<CheckCircleOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:38:<Col span={6}><Card><Statistic title="Success Rate" value={(stats.overall_success_rate * 100).toFixed(0) + "%"} prefix={<TrophyOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:47:<Card title="Agent Roles" size="small" style={{ marginTop: 24 }}>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:62:<Card title="Recent Delegations" size="small" style={{ marginTop: 24 }}>
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:80:<Col span={6}><Statistic title="Total Records" value={summary.summary.total_records} /></Col>
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:81:<Col span={6}><Statistic title="Total Tokens" value={summary.summary.total_tokens} /></Col>
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:82:<Col span={6}><Statistic title="Avg Latency" value={summary.summary.average_latency_ms} suffix="ms" /></Col>
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:83:<Col span={6}><Statistic title="Total Cost" value={`$${summary.summary.total_cost.toFixed(4)}`} /></Col>
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:107:<Input placeholder="Agent ID" value={agentFilter} onChange={(e) => { setAgentFilter(e.target.value); setPage(1) }} allowClear />
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:307:<Descriptions.Item label="Timestamp">
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:310:<Descriptions.Item label="Actor">{detailModal.actor}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:311:<Descriptions.Item label="Action">
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:316:<Descriptions.Item label="Resource Type">
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:321:<Descriptions.Item label="Resource ID">{detailModal.resource_id}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:322:<Descriptions.Item label="Task ID">{detailModal.task_id || '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:323:<Descriptions.Item label="Request ID">{detailModal.request_id || '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:324:<Descriptions.Item label="Before" span={2}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:329:<Descriptions.Item label="After" span={2}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:334:<Descriptions.Item label="Metadata" span={2}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:89:title="Delete this user?"
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:124:title="Delete this role?"
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:194:{usersError && <Alert type="error" message="Failed to load users" showIcon style={{ marginBottom: 16 }} />}
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:197:<Empty description="No users found" />
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:204:title="Create User"
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:211:<Form.Item name="username" label="Username" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:214:<Form.Item name="email" label="Email" rules={[{ required: true, type: 'email' }]}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:217:<Form.Item name="roles" label="Roles">
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:119:<Statistic title="Agent 数量" value={totalAgents} prefix={<RobotOutlined />} loading={agentsLoading} />
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:140:<Statistic title="Agent 执行次数" value={metrics.agent_runs} />
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:145:<Statistic title="Agent 成功率" value={(metrics.agent_success_rate * 100).toFixed(0)} suffix="%" />
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:191:<Card style={{ marginTop: 16 }} title="Agent 列表">
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:12:if (error) return <Alert type="error" message="Failed to load cluster data" description={String(error)} />
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:26:<Col span={6}><Card><Statistic title="Instances" value={data?.total ?? 0} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:27:<Col span={6}><Card><Statistic title="Leader" value={data?.leader || "N/A"} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:28:<Col span={6}><Card><Statistic title="Persistence" value={data?.health?.persistence ?? "unknown"} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:29:<Col span={6}><Card><Statistic title="Redis" value={data?.health?.redis ?? "unknown"} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:32:<Card title="Cluster Instances">
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:86:<Col span={8}><Card><Statistic title="API Keys" value={keysData?.total ?? 0} prefix={<KeyOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:87:<Col span={8}><Card><Statistic title="Webhooks" value={whData?.total ?? 0} prefix={<LinkOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:88:<Col span={8}><Card><Statistic title="Webhook Failures" value={whData?.webhooks?.reduce((s: number, w: { failure_count: number }) => s + w.failure_count, 0) ?? 0} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:99:<Modal title="Create API Key" open={keyModalOpen} onOk={handleCreateKey} onCancel={() => setKeyModalOpen(false)} confirmLoading={createKeyMut.isPending}>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:120:<Modal title="Add Webhook" open={whModalOpen} onOk={handleCreateWebhook} onCancel={() => setWhModalOpen(false)} confirmLoading={createWhMut.isPending}>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:122:<Input placeholder="Webhook URL" value={newWhUrl} onChange={(e) => setNewWhUrl(e.target.value)} />
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:67:<Statistic title="Total Records" value={exp?.total_records ?? 0} />
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:72:<Statistic title="Success Rate" value={exp?.success_rate ? (exp.success_rate * 100).toFixed(1) : 0} suffix="%" />
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:77:<Statistic title="Successes" value={exp?.success_count ?? 0} valueStyle={{ color: "#3f8600" }} />
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:82:<Statistic title="Failures" value={exp?.failure_count ?? 0} valueStyle={{ color: "#cf1322" }} />
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:165:<Modal title="Submit Feedback" open={feedbackModal} onOk={handleFeedback} onCancel={() => setFeedbackModal(false)}>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:63:<Statistic title="Total Tasks" value={analysis.task_analysis.total_tasks} />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:67:title="Completed"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:75:title="Failed"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:83:title="Success Rate"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:99:title="Avg Duration"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:106:<Statistic title="Best Agent" value={analysis.best_agent || "-"} />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:109:<Statistic title="Worst Agent" value={analysis.worst_agent || "-"} />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:146:<Card title="Agent Performance" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:247:<Card title="Optimization History">
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:38:<Popconfirm title="Delete?" onConfirm={() => deleteMut.mutate(r.id)}><Button size="small" danger icon={<DeleteOutlined />} /></Popconfirm></Space>) },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:46:{ key: "docs", label: "Documents", children: (docsData?.documents || []).length === 0 ? <Empty description="No documents yet" /> : (
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:62:<Modal title="Document Detail" open={!!viewDocId} onCancel={() => setViewDocId(null)} footer={null} width={700}>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:64:<Descriptions.Item label="Title">{viewDoc.document.title}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:65:<Descriptions.Item label="Type"><Tag color={TYPE_COLORS[viewDoc.document.doc_type]}>{DOC_TYPE_LABELS[viewDoc.document.doc_type]}</Tag></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:66:<Descriptions.Item label="Tags">{viewDoc.document.tags?.map((t: string) => <Tag key={t}>{t}</Tag>)}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:67:<Descriptions.Item label="Summary">{viewDoc.document.summary}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:68:<Descriptions.Item label="Chunks">{(viewDoc.chunks || []).length}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:71:<Modal title="Add Web Content" open={webModalOpen} onOk={handleWebSubmit} onCancel={() => setWebModalOpen(false)}>
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:64:<Select placeholder="Tenant (optional)" allowClear>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:124:<Popconfirm title="Delete this memory?" onConfirm={() => handleDelete(record.id)}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:160:placeholder="Search memories..."
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:184:<Empty description="No memories found. Try adding one!" />
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:215:<Modal title="Add Memory" open={addModalOpen} onOk={handleAdd} onCancel={() => { setAddModalOpen(false); addForm.resetFields() }} confirmLoading={saveMut.isPending}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:217:<Form.Item name="content" label="Content" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:220:<Form.Item name="memory_type" label="Type">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:223:<Form.Item name="importance" label="Importance">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:226:<Form.Item name="tags" label="Tags">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:227:<Select mode="tags" placeholder="Add tags" />
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:233:<Modal title="Edit Memory" open={editModalOpen} onOk={handleEdit} onCancel={() => { setEditModalOpen(false); setEditingItem(null) }} confirmLoading={updateMut.isPending}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:235:<Form.Item name="content" label="Content" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:238:<Form.Item name="memory_type" label="Type">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:241:<Form.Item name="importance" label="Importance">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:244:<Form.Item name="tags" label="Tags">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:251:<Modal title="Memory Detail" open={detailModalOpen} onCancel={() => setDetailModalOpen(false)} footer={null} width={600}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:255:<Descriptions.Item label="Type"><Tag color={getTypeColor(detailItem.memory_type)}>{detailItem.memory_type}</Tag></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:256:<Descriptions.Item label="Content"><Paragraph style={{ whiteSpace: "pre-wrap" }}>{detailItem.content}</Paragraph></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:257:<Descriptions.Item label="Importance">{(detailItem.importance * 100).toFixed(0)}%</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:258:<Descriptions.Item label="Tags">{detailItem.tags?.map((t) => <Tag key={t}>{t}</Tag>) || "None"}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:259:<Descriptions.Item label="Created">{detailItem.created_at}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:260:<Descriptions.Item label="Updated">{detailItem.updated_at}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:280:render: (_: unknown, r: MemoryItem) => <Popconfirm title="Delete?" onConfirm={() => deleteMut.mutate(r.id)}><Button size="small" danger icon={<DeleteOutlined />} /></Popconfirm>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:14:if (error) return <Alert type="error" message="Failed to load metrics" description={String(error)} />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:22:<Card><Statistic title="CPU" value={allMetrics?.cpu?.percent ?? 0} suffix="%" precision={1} prefix={<ThunderboltOutlined />} /></Card>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:25:<Card><Statistic title="Memory" value={allMetrics?.memory?.percent ?? 0} suffix="%" precision={1} /></Card>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:28:<Card><Statistic title="Process Memory" value={allMetrics?.memory?.process_mb ?? 0} suffix="MB" precision={1} /></Card>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:31:<Card><Statistic title="Uptime" value={Math.round((allMetrics?.runtime?.uptime_seconds ?? 0) / 60)} suffix="min" /></Card>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:37:<Card title="Tasks">
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:38:<Statistic title="Total" value={taskMetrics?.total ?? 0} />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:44:<Card title="Queue">
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:45:<Statistic title="Running" value={allMetrics?.queue?.running ?? 0} prefix={<CheckCircleOutlined />} />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:46:<Statistic title="Queued" value={allMetrics?.queue?.queued ?? 0} prefix={<ClockCircleOutlined />} />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:50:<Card title="Agents">
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:51:<Statistic title="Total Executions" value={agentMetrics?.total_executions ?? 0} />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:52:<Statistic title="Avg Latency" value={allMetrics?.agents?.latency?.avg?.toFixed(1) ?? 0} suffix="ms" />
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:147:<Card title="Available Models" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:168:<Card title="Provider Status" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:177:{testOk === true ? <Badge status="success" text="Connected" /> : testOk === false ? <Badge status="error" text="Failed" /> : <Badge status="default" text="Unknown" />}
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:194:<Card title="Quick Test" extra={
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:200:<Alert type="success" message="Generated" description={genResult.slice(0, 300)} />
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:209:title="Configure Provider"
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:232:placeholder="http://localhost:11434"
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:240:placeholder="sk-..."
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:249:title="Generate Test"
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:32:<Descriptions.Item label="Session ID">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:35:<Descriptions.Item label="Planner">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:40:<Descriptions.Item label="Task" span={2}>
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:43:<Descriptions.Item label="Duration">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:49:<Descriptions.Item label="Fallback">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:60:<Descriptions.Item label="Created At">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:63:<Descriptions.Item label="Status">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:78:<Alert message="Planning Error" description={session.error} type="error" showIcon />
+E:\半自动工作台\frontend\src\pages\Planning\RawResponsePanel.tsx:14:<Card title="LLM 原始响应" size="small" extra={<CodeOutlined />}>
+E:\半自动工作台\frontend\src\pages\Research\SourceList.tsx:21:return <Empty description="No sources found" />
+E:\半自动工作台\frontend\src\pages\Research\WriterPreview.tsx:44:return <Empty description="No content generated yet" />
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:35:return <Alert type="error" message="Failed to load system status" description={String(healthError)} />
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:43:<Card title="Runtime">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:45:<Descriptions.Item label="Status">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:48:<Descriptions.Item label="Instance ID">{info?.instance_id || '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:49:<Descriptions.Item label="Uptime">{readiness?.uptime_seconds ? ${Math.round(readiness.uptime_seconds)}s : '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:50:<Descriptions.Item label="Active Tasks">{info?.active_tasks ?? '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:51:<Descriptions.Item label="Started At">{info?.started_at || '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:52:<Descriptions.Item label="Health"><StatusTag status={health?.status || 'unknown'} /></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:56:<Card title="Infrastructure">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:58:<Descriptions.Item label="PostgreSQL">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:61:<Descriptions.Item label="Redis">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:64:<Descriptions.Item label="Persistence">{info?.health?.persistence_status || readiness?.persistence || '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:69:<Card title="Queue">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:71:<Descriptions.Item label="Running">{info?.active_tasks ?? 0}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:72:<Descriptions.Item label="Queued">{info?.queued_tasks ?? 0}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:73:<Descriptions.Item label="Max Concurrent">{info?.health?.max_concurrent ?? 3}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:78:<Card title="Metrics">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:80:<Descriptions.Item label="Total Tasks">{info.metrics.total_tasks}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:81:<Descriptions.Item label="Success Rate">{info.metrics.success_rate != null ? ${(info.metrics.success_rate * 100).toFixed(1)}% : '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:82:<Descriptions.Item label="Avg Duration">{info.metrics.average_duration ? ${info.metrics.average_duration.toFixed(1)}ms : '-'}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:117:title="Delete this artifact?"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:119:okText="Delete"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:120:cancelText="Cancel"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:173:<Empty description="No artifacts yet" />
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:192:<Descriptions.Item label="Type"><Tag color={typeConfig[viewing.type]?.color || "default"}>{viewing.type}</Tag></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:193:<Descriptions.Item label="Name">{viewing.name}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:194:<Descriptions.Item label="Owner">{viewing.owner}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:195:<Descriptions.Item label="Created" span={2}>{new Date(viewing.created_at).toLocaleString("zh-CN")}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:28:return <Empty description="No task ID provided" />
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:32:return <div style={{ textAlign: 'center', padding: 40 }}><Spin tip="Loading execution trace..." /></div>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:38:<Empty description="Failed to load execution trace">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:50:<Empty description="No execution trace recorded for this task">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:97:<Descriptions.Item label="Reason">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:102:<Descriptions.Item label="Decision">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:107:<Descriptions.Item label="Input">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:112:<Descriptions.Item label="Metadata">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:116:<Descriptions.Item label="Time">
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:98:<Descriptions.Item label="Task ID"><Text code>{task.task_id}</Text></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:49:<Descriptions.Item label="Agent">
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:41:return <Empty description="No Artifacts" />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:95:<Popconfirm title="Delete this artifact?" onConfirm={() => onDelete(record.id)}>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:68:return <Empty description="Select an artifact to view" />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:84:<Descriptions.Item label="Owner"><Tag>{item.owner}</Tag></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:85:<Descriptions.Item label="Created">{new Date(item.created_at).toLocaleString("zh-CN")}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:86:{sourceAgentId && <Descriptions.Item label="Source Agent"><Tag color="blue">{sourceAgentId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:87:{sourceStepId && <Descriptions.Item label="Source Step"><Tag color="green">{sourceStepId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:89:<Descriptions.Item label="Source Task">
+E:\半自动工作台\frontend\src\pages\Workspace\Workspace.tsx:68:<Statistic title="Artifact 数量" value={items.length} prefix={<FileOutlined />} />
+E:\半自动工作台\frontend\src\pages\Workspace\Workspace.tsx:81:<Card title="Artifact 列表" size="small">
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:56:if (!item) return <Empty description="Select an artifact to view" />
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:71:<Descriptions.Item label="Owner"><Tag>{item.owner}</Tag></Descriptions.Item>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:72:<Descriptions.Item label="Created">{new Date(item.created_at).toLocaleString("zh-CN")}</Descriptions.Item>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:73:{sourceAgentId && <Descriptions.Item label="Agent"><Tag color="blue">{sourceAgentId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:74:{sourceStepId && <Descriptions.Item label="Step"><Tag color="green">{sourceStepId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:76:<Descriptions.Item label="Task">

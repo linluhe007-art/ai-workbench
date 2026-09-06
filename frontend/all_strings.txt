@@ -1,0 +1,802 @@
+﻿E:\半自动工作台\frontend\src\pages\AgentDetail\AgentDetail.tsx:37:return <div style={{ textAlign: 'center', padding: 80 }}><Spin size="large" /></div>
+E:\半自动工作台\frontend\src\pages\AgentDetail\AgentDetail.tsx:69:<Descriptions.Item label="Agent ID">
+E:\半自动工作台\frontend\src\pages\AgentDetail\AgentHistory.tsx:26:<Tag color="success" icon={<CheckCircleOutlined />}>成功</Tag>
+E:\半自动工作台\frontend\src\pages\AgentDetail\AgentHistory.tsx:28:<Tag color="error" icon={<CloseCircleOutlined />}>失败</Tag>
+E:\半自动工作台\frontend\src\pages\AgentDetail\AgentHistory.tsx:57:size="small"
+E:\半自动工作台\frontend\src\pages\AgentDetail\AgentHistory.tsx:66:size="small"
+E:\半自动工作台\frontend\src\pages\AgentDetail\CapabilityPanel.tsx:34:size="small"
+E:\半自动工作台\frontend\src\pages\AgentDetail\HealthPanel.tsx:31:<Card title={<Space><HeartOutlined /><span>健康状态</span></Space>} size="small" loading={loading}>
+E:\半自动工作台\frontend\src\pages\AgentDetail\HealthPanel.tsx:32:<Text type="secondary">无数据</Text>
+E:\半自动工作台\frontend\src\pages\AgentDetail\HealthPanel.tsx:48:size="small"
+E:\半自动工作台\frontend\src\pages\AgentDetail\HealthPanel.tsx:50:<Descriptions column={1} size="small">
+E:\半自动工作台\frontend\src\pages\AgentDetail\HealthPanel.tsx:62:<Text type="danger">{health.error}</Text>
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:16:} from "antd"
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:35:idle: "default",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:36:running: "processing",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:37:waiting: "warning",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:38:completed: "success",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:39:failed: "error",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:40:ready: "success",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:41:initializing: "processing",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:42:stopped: "default",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:43:unknown: "default",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:61:message.success("Agent registered")
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:66:message.error("Failed to register")
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:73:message.success("Heartbeat sent")
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:75:message.error("Heartbeat failed")
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:83:message.success("Agent disabled")
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:86:message.success("Agent enabled")
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:89:message.error("Operation failed")
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:95:title: "Agent",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:96:dataIndex: "name",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:97:key: "name",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:100:<Badge status={record.enabled ? "processing" : "default"} />
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:107:dataIndex: "lifecycle_state",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:108:key: "state",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:109:render: (state: string) => <Tag color={stateColorMap[state] || "default"}>{state}</Tag>,
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:113:dataIndex: "capabilities",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:114:key: "capabilities",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:118:<Tag key={c} color="blue">{c}</Tag>
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:125:key: "load",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:131:dataIndex: "last_heartbeat",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:132:key: "heartbeat",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:133:render: (hb: string | null) => (hb ? new Date(hb).toLocaleTimeString() : "Never"),
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:137:key: "actions",
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:141:size="small"
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:148:size="small"
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:152:{record.enabled ? "Disable" : "Enable"}
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:161:<div style={{ padding: 48, textAlign: "center" }}>
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:162:<Spin size="large" />
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:168:return <Alert type="error" message="加载失败" description={String(error)} />
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:172:<Space style={{ marginBottom: 16, justifyContent: "space-between", width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:180:<Button type="primary" icon={<PlusOutlined />} onClick={() => setModalOpen(true)}>
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:190:rowKey="agent_id"
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:192:size="middle"
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:204:<Space direction="vertical" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:206:placeholder="Agent ID"
+E:\半自动工作台\frontend\src\pages\AgentManagement\AgentManagement.tsx:211:mode="tags"
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:1:import React from "react"
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:2:import { Card, Typography, Table, Tag, Space, Statistic, Row, Col, Spin, Empty, Progress } from "antd"
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:9:const ROLE_COLORS: Record<string, string> = { research: "purple", coding: "blue", writer: "green", analyst: "orange" }
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:21:{ title: "Agent", dataIndex: "name", key: "name", render: (t: string, r: TeamMember) => <Space><Tag color={ROLE_COLORS[r.role]}>{r.role}</Tag>{t}</Space> },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:22:{ title: "能力", dataIndex: "capabilities", key: "caps", render: (caps: string[]) => caps?.map((c) => <Tag key={c}>{c}</Tag>) },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:23:{ title: "任务数", dataIndex: "total_tasks", key: "tasks", width: 80 },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:24:{ title: "成功率", dataIndex: "success_rate", key: "rate", width: 140, render: (v: number) => <Progress percent={Math.round(v * 100)} size="small" /> },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:25:{ title: "平均耗时", dataIndex: "avg_duration_ms", key: "dur", width: 100, render: (v: number) => v > 0 ? (v / 1000).toFixed(1) + "s" : "-" },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:31:<Paragraph type="secondary">Your personal AI agent team with specialized roles for research, coding, writing, and analysis.</Paragraph>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:43:<Table rowKey="id" dataSource={members} columns={columns} size="middle" pagination={false} />
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:47:<Card title="Agent 角色" size="small" style={{ marginTop: 24 }}>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:51:<Card size="small" title={<Tag color={ROLE_COLORS[r.role]}>{r.name}</Tag>}>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:52:<Paragraph type="secondary" ellipsis={{ rows: 2 }}>{r.description}</Paragraph>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:62:<Card title="最近委派" size="small" style={{ marginTop: 24 }}>
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:64:{ title: "任务", dataIndex: "task_id", ellipsis: true },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:65:{ title: "角色", dataIndex: "role", width: 100, render: (r: string) => <Tag color={ROLE_COLORS[r]}>{r}</Tag> },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:66:{ title: "结果", dataIndex: "success", width: 80, render: (v: boolean) => v ? <Tag color="green">是</Tag> : <Tag color="red">否</Tag> },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:67:{ title: "耗时", dataIndex: "duration_ms", width: 100, render: (v: number) => (v / 1000).toFixed(1) + "s" },
+E:\半自动工作台\frontend\src\pages\AgentTeam\index.tsx:68:]} size="small" pagination={false} />
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:2:import { Card, Col, Row, Typography, Tag, Spin, Alert, Table, Statistic, Input, Button, Space, Tabs, Descriptions, Progress } from "antd"
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:10:command_analysis: "blue", plan_generation: "purple", memory_retrieval: "green",
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:11:agent_selection: "orange", workflow_selection: "cyan", tool_selection: "magenta",
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:12:final_result: "red",
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:24:{ title: "类型", dataIndex: "trace_type", key: "type", width: 160, render: (t: string) => <Tag color={traceTypeColors[t] || "default"}>{t}</Tag> },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:25:{ title: "组件", dataIndex: "component", key: "comp", width: 120 },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:26:{ title: "任务 ID", dataIndex: "task_id", key: "tid", ellipsis: true, width: 140 },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:27:{ title: "原因", dataIndex: "reason", key: "reason", ellipsis: true },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:28:{ title: "置信度", dataIndex: "confidence", key: "conf", width: 100, render: (v: number) => `${(v * 100).toFixed(0)}%` },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:29:{ title: "时间", dataIndex: "created_at", key: "time", width: 180, render: (t: string) => t?.slice(0, 19).replace("T", " ") },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:40:<Alert type="info" message={`Task ${searchTaskId}: ${taskData.total} traces found`} style={{ marginBottom: 8 }} />
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:42:<Table columns={columns} dataSource={traces} rowKey="id" loading={isLoading} size="small" pagination={{ pageSize: 20 }} />
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:52:{ title: "名称", dataIndex: "name", key: "name" },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:53:{ title: "版本", dataIndex: "version", key: "ver", width: 60 },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:54:{ title: "是否启用", dataIndex: "active", key: "active", width: 80, render: (v: boolean) => <Tag color={v ? "green" : "default"}>{v ? "Yes" : "No"}</Tag> },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:55:{ title: "变量", dataIndex: "variables", key: "vars", render: (v: string[]) => v?.join(", ") || "-" },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:56:{ title: "内容", dataIndex: "content", key: "content", ellipsis: true, width: 300 },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:57:{ title: "创建时间", dataIndex: "created_at", key: "time", width: 170, render: (t: string) => t?.slice(0, 19).replace("T", " ") },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:59:return <Table columns={cols} dataSource={prompts} rowKey="id" loading={isLoading} size="small" pagination={false} />
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:68:{ title: "模型", dataIndex: "model", key: "model" },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:69:{ title: "服务提供方", dataIndex: "provider", key: "prov" },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:70:{ title: "输入 Token", dataIndex: "tokens_input", key: "tin" },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:71:{ title: "输出 Token", dataIndex: "tokens_output", key: "tout" },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:72:{ title: "延迟", dataIndex: "latency_ms", key: "lat", render: (v: number) => `${v}ms` },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:73:{ title: "成本", dataIndex: "cost", key: "cost" },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:74:{ title: "任务", dataIndex: "task_id", key: "tid", ellipsis: true },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:81:<Col span={6}><Statistic title="Token 总数" value={summary.summary.total_tokens} /></Col>
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:86:<Table columns={cols} dataSource={recs} rowKey="id" size="small" pagination={{ pageSize: 15 }} />
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:95:<Tabs defaultActiveKey="trace" items={[
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:96:{ key: "trace", label: <span><ApiOutlined /> Decision Trace</span>, children: <DecisionTraceViewer /> },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:97:{ key: "prompt", label: <span><CodeOutlined /> 提示词 Registry</span>, children: <提示词Viewer /> },
+E:\半自动工作台\frontend\src\pages\AIDebug\index.tsx:98:{ key: "usage", label: <span><ThunderboltOutlined /> Token Usage</span>, children: <UsagePanel /> },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:1:import { useState, useCallback, useEffect } from "react"
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:2:import { useSearchParams, useNavigate } from "react-router-dom"
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:3:import { Card, Input, Button, Space, Table, Tag, Select, DatePicker, Typography, Spin, Alert, Modal, Row, Col } from "antd"
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:13:const typeOptions = ["text", "markdown", "json", "list", "url", "image_url"]
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:14:const typeColors: Record<string, string> = { text: "blue", markdown: "purple", json: "green", list: "orange", url: "cyan", image_url: "magenta" }
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:22:const [typeFilter, setTypeFilter] = useState<string | undefined>(searchParams.get("type") || undefined)
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:23:const [agentFilter, setAgentFilter] = useState(searchParams.get("agent_id") || "")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:24:const [taskFilter, setTaskFilter] = useState(searchParams.get("task_id") || "")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:25:const [workspaceFilter, setWorkspaceFilter] = useState(searchParams.get("workspace_id") || "")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:26:const [stepFilter, setStepFilter] = useState(searchParams.get("step_id") || "")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:27:const [sortBy, setSortBy] = useState<"created_at" | "name" | "type">((searchParams.get("sort_by") as "created_at" | "name" | "type") || "created_at")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:28:const [order, setOrder] = useState<"asc" | "desc">((searchParams.get("order") as "asc" | "desc") || "desc")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:29:const [page, setPage] = useState(parseInt(searchParams.get("page") || "1", 10))
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:58:if (sortBy !== "created_at") p.sort_by = sortBy
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:59:if (order !== "desc") p.order = order
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:71:setSortBy("created_at")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:72:setOrder("desc")
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:80:{ title: "名称", dataIndex: "name", key: "name", ellipsis: true, render: (n: string) => <span style={{ fontWeight: 500 }}>{n}</span> },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:81:{ title: "类型", dataIndex: "type", key: "type", width: 100, render: (t: string) => <Tag color={typeColors[t] || "default"}>{t}</Tag> },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:82:{ title: "Agent", key: "agent", width: 120, render: (_: unknown, r: ArtifactItem) => <Tag color="blue">{(r.metadata?.created_by as string) || r.owner}</Tag> },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:83:{ title: "步骤", key: "step", width: 100, render: (_: unknown, r: ArtifactItem) => { const s = r.metadata?.step_id as string | undefined; return s ? <Tag color="green">{s}</Tag> : "-" } },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:84:{ title: "任务", key: "task", width: 140, render: (_: unknown, r: ArtifactItem) => { const t = r.metadata?.task_id as string | undefined; return t ? <Tag style={{ cursor: "pointer" }} onClick={() => navigate(`/tasks/${t}`)}>{t.slice(0, 12)}...</Tag> : "-" } },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:85:{ title: "创建时间", dataIndex: "created_at", key: "created_at", width: 170, render: (t: string) => new Date(t).toLocaleString("zh-CN") },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:86:{ title: "操作", key: "action", width: 80, render: (_: unknown, r: ArtifactItem) => <Button size="small" icon={<EyeOutlined />} onClick={() => setViewing(r)} /> },
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:90:<Space direction="vertical" size="large" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:94:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:99:<Button type="primary" icon={<SearchOutlined />} onClick={() => refetch()}>搜索</Button>
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:107:<Input placeholder="Agent ID" value={agentFilter} onChange={(e) => { setAgentFilter(e.target.value); setPage(1) }} allowClear />
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:120:<Select value={sortBy} onChange={setSortBy} style={{ width: "60%" }} options={[{ label: "创建时间", value: "created_at" }, { label: "名称", value: "name" }, { label: "类型", value: "type" }]} />
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:121:<Select value={order} onChange={setOrder} style={{ width: "40%" }} options={[{ label: "降序", value: "desc" }, { label: "升序", value: "asc" }]} />
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:128:{error && <Alert message="搜索失败" description={error.message} type="error" showIcon action={<Button size="small" onClick={() => refetch()}>重试</Button>} />}
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:131:<Card size="small" title={`Results (${total})`}>
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:133:<Spin style={{ display: "block", margin: "40px auto" }} />
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:139:size="small"
+E:\半自动工作台\frontend\src\pages\Artifacts\Artifacts.tsx:152:<Modal title={viewing?.name || "Detail"} open={!!viewing} onCancel={() => setViewing(null)} footer={null} width={640}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:176:<Button size="small" type="link" onClick={() => setDetailModal(record)}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:190:<Typography.Text type="secondary" style={{ marginBottom: 16, display: 'block' }}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:196:<Card size="small" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:236:<Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:253:type="error"
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:257:<Button size="small" onClick={() => refetch()}>
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:278:size="small"
+E:\半自动工作台\frontend\src\pages\Audit\AuditExplorer.tsx:305:<Descriptions column={2} bordered size="small">
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:65:<Tag key={r} color="blue">{r.replace('role-', '')}</Tag>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:97:<Button size="small" danger loading={deleteUserMutation.isPending}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:132:<Button size="small" danger loading={deleteRoleMutation.isPending}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:188:<Button type="primary" icon={<PlusOutlined />} onClick={() => setUserModalOpen(true)}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:194:{usersError && <Alert type="error" message="加载用户失败" showIcon style={{ marginBottom: 16 }} />}
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:200:<Table columns={userColumns} dataSource={usersData.users} rowKey="id" size="small" />
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:210:<Form form={userForm} layout="vertical">
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:211:<Form.Item name="username" label="用户名" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:214:<Form.Item name="email" label="邮箱" rules={[{ required: true, type: 'email' }]}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:217:<Form.Item name="roles" label="角色">
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:218:<Select mode="tags" placeholder="例如：role-viewer" />
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:231:<Button type="primary" icon={<PlusOutlined />} onClick={() => setRoleModalOpen(true)}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:237:{rolesError && <Alert type="error" message="加载角色失败" showIcon style={{ marginBottom: 16 }} />}
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:243:<Table columns={roleColumns} dataSource={rolesData.roles} rowKey="id" size="small" />
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:253:<Form form={roleForm} layout="vertical">
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:254:<Form.Item name="name" label="角色名称" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:257:<Form.Item name="description" label="描述" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:260:<Form.Item name="permissions" label="权限">
+E:\半自动工作台\frontend\src\pages\Auth\UserManagement.tsx:261:<Select mode="multiple" placeholder="选择权限" options={permissionOptions} />
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:18:} from "antd"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:40:active: "green",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:41:paused: "orange",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:42:disabled: "red",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:43:completed: "blue",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:57:webhook: "Webhook",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:70:const [newTriggerType, setNewTriggerType] = useState("schedule")
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:72:const [newActionType, setNewActionType] = useState("create_task")
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:97:setNewTriggerType("schedule")
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:114:const next = currentStatus === "active" ? "paused" : "active"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:128:okType: "danger",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:144:dataIndex: "name",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:145:key: "name",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:151:<Typography.Text type="secondary" style={{ fontSize: 12 }}>
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:162:dataIndex: "trigger",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:163:key: "trigger_type",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:170:title: "Cron",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:171:dataIndex: "trigger",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:172:key: "cron",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:183:dataIndex: "status",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:184:key: "status",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:187:<Tag color={statusColorMap[status] || "default"}>
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:194:dataIndex: "last_run_at",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:195:key: "last_run_at",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:198:v ? new Date(v).toLocaleString("zh-CN") : <span style={{ color: "#ccc" }}>-</span>,
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:202:dataIndex: "run_count",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:203:key: "run_count",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:208:key: "actions",
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:213:size="small"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:221:size="small"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:222:icon={record.status === "active" ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:225:{record.status === "active" ? "\u6682\u505c" : "\u6fc0\u6d3b"}
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:228:size="small"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:238:size="small"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:250:<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:258:<Button type="primary" icon={<PlusOutlined />} onClick={() => setModalOpen(true)}>
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:266:<Alert type="error" message="\u52a0\u8f7d\u5931\u8d25" description={String(error)} showIcon />
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:288:<Space direction="vertical" style={{ width: "100%" }} size="middle">
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:313:{ value: "schedule", label: "\u5b9a\u65f6 (Cron)" },
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:314:{ value: "manual", label: "\u624b\u52a8\u89e6\u53d1" },
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:315:{ value: "event", label: "\u4e8b\u4ef6\u89e6\u53d1" },
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:316:{ value: "webhook", label: "Webhook" },
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:320:{newTriggerType === "schedule" && (
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:328:<Typography.Text type="secondary" style={{ fontSize: 12 }}>
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:340:{ value: "create_task", label: "\u521b\u5efa\u4efb\u52a1" },
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:341:{ value: "notify", label: "\u53d1\u9001\u901a\u77e5" },
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:342:{ value: "export", label: "\u5bfc\u51fa\u6570\u636e" },
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:362:size="small"
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:366:<Tag color={log.status === "completed" ? "green" : log.status === "failed" ? "red" : "blue"}>
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:376:<Alert type="error" message={log.error as string} />
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:378:<Descriptions size="small" column={1}>
+E:\半自动工作台\frontend\src\pages\AutomationCenter\index.tsx:389:<Alert type="info" message="\u6682\u65e0\u6267\u884c\u65e5\u5fd7" />
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:2:import { useNavigate } from "react-router-dom"
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:3:import { Card, Input, Button, Typography, Tag, Space, Spin, Alert, List, Divider } from "antd"
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:27:if (e.key === "Enter" && !e.shiftKey) {
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:38:<Paragraph type="secondary">用自然语言描述你想做的事，AI 将理解你的意图并自动创建任务。</Paragraph>
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:42:placeholder='e.g. "help me research AI trends and write a report"'
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:50:type="primary"
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:51:size="large"
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:62:<Alert type="error" message="处理命令失败" description={String(processMut.error)} style={{ marginBottom: 16 }} />
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:67:<Space direction="vertical">
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:68:<Text><strong>任务类型：</strong> <Tag color="blue">{processMut.data.intent.task_type}</Tag></Text>
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:72:<Text><strong>所需工具：</strong> {processMut.data.intent.required_tools.map((t: string) => <Tag key={t} color="green">{t}</Tag>)}</Text>
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:73:{processMut.data.task_id && <Button type="link" onClick={() => navigate("/tasks/" + processMut.data.task_id)}>查看任务</Button>}
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:82:<Text type="secondary">暂无历史命令</Text>
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:84:<List size="small" dataSource={historyExamples} renderItem={(item: Record<string, unknown>) => (
+E:\半自动工作台\frontend\src\pages\Command\CommandCenter.tsx:86:<Space>{String(item.prompt)} <Tag>{String((item.intent as Record<string, unknown>)?.task_type || "unknown")}</Tag></Space>
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:100:<Paragraph type="secondary">AI Agent 运行时控制台 - Phase 4.2</Paragraph>
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:119:<Statistic title="Agent 数量" value={totalAgents} prefix={<RobotOutlined />} loading={agentsLoading} />
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:139:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:140:<Statistic title="Agent 执行次数" value={metrics.agent_runs} />
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:144:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:145:<Statistic title="Agent 成功率" value={(metrics.agent_success_rate * 100).toFixed(0)} suffix="%" />
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:149:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:154:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:171:<Button type="primary" icon={<SendOutlined />} onClick={handleCreateTask} loading={createTask.isPending}>
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:183:rowKey="task_id"
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:184:size="small"
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:191:<Card style={{ marginTop: 16 }} title="Agent 列表">
+E:\半自动工作台\frontend\src\pages\Dashboard\index.tsx:197:size="small"
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:1:import React from "react"
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:2:import { Card, Table, Tag, Typography, Spin, Alert, Row, Col, Statistic } from "antd"
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:11:if (isLoading) return <div style={{ padding: 48, textAlign: "center" }}><Spin size="large" /></div>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:12:if (error) return <Alert type="error" message="加载集群数据失败" description={String(error)} />
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:15:{ title: "实例", dataIndex: "instance_id", key: "id" },
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:16:{ title: "角色", dataIndex: "role", key: "role", render: (r: string) => r === "leader" ? <Tag color="gold" icon={<CrownOutlined />}>主节点</Tag> : <Tag>工作节点</Tag> },
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:17:{ title: "状态", dataIndex: "status", key: "status", render: (s: string) => <Tag color="green" icon={<CheckCircleOutlined />}>{s}</Tag> },
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:18:{ title: "启动时间", dataIndex: "started_at", key: "started", render: (t: string) => t ? new Date(t).toLocaleString() : "-" },
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:27:<Col span={6}><Card><Statistic title="主节点" value={data?.leader || "N/A"} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:28:<Col span={6}><Card><Statistic title="持久化" value={data?.health?.persistence ?? "unknown"} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:29:<Col span={6}><Card><Statistic title="Redis" value={data?.health?.redis ?? "unknown"} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Deployment\DeploymentStatus.tsx:33:<Table dataSource={data?.instances || []} columns={cols} rowKey="instance_id" pagination={false} size="middle" />
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:5:} from "antd"
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:22:const [newKeyPerms, setNewKeyPerms] = useState<string[]>(["read"])
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:32:const [newWhEvents, setNewWhEvents] = useState<string[]>(["task.completed"])
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:39:message.success("API Key created")
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:40:} catch { message.error("Failed to create API key") }
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:47:message.success("Webhook created")
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:50:} catch { message.error("Failed to create webhook") }
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:54:try { await deleteKeyMut.mutateAsync(id); message.success("Key deleted") }
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:55:catch { message.error("Failed to delete") }
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:59:try { await deleteWhMut.mutateAsync(id); message.success("Webhook deleted") }
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:60:catch { message.error("Failed to delete") }
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:64:{ title: "名称", dataIndex: "name", key: "name" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:65:{ title: "前缀", dataIndex: "key_prefix", key: "prefix", render: (v: string) => <Text code>{v}</Text> },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:66:{ title: "权限", dataIndex: "permissions", key: "perms", render: (p: string[]) => <Space size={4}>{p.map((x) => <Tag key={x}>{x}</Tag>)}</Space> },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:67:{ title: "状态", dataIndex: "enabled", key: "status", render: (e: boolean) => e ? <Tag color="green">已启用</Tag> : <Tag color="red">已吊销</Tag> },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:68:{ title: "创建时间", dataIndex: "created_at", key: "created", render: (t: string) => t ? new Date(t).toLocaleString() : "-" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:69:{ title: "操作", key: "actions", render: (_: unknown, r: { id: string }) => <Button size="small" danger icon={<DeleteOutlined />} onClick={() => handleDeleteKey(r.id)}>删除</Button> },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:73:{ title: "URL", dataIndex: "url", key: "url", render: (u: string) => <Text code style={{ maxWidth: 300, overflow: "hidden", textOverflow: "ellipsis", display: "inline-block" }}>{u}</Text> },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:74:{ title: "事件", dataIndex: "events", key: "events", render: (e: string[]) => <Space size={4}>{e.map((x) => <Tag key={x}>{x}</Tag>)}</Space> },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:75:{ title: "已投递", dataIndex: "delivery_count", key: "delivered" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:76:{ title: "失败", dataIndex: "failure_count", key: "failed" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:77:{ title: "创建时间", dataIndex: "created_at", key: "created", render: (t: string) => t ? new Date(t).toLocaleString() : "-" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:78:{ title: "操作", key: "actions", render: (_: unknown, r: { id: string }) => <Button size="small" danger icon={<DeleteOutlined />} onClick={() => handleDeleteWebhook(r.id)}>删除</Button> },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:86:<Col span={8}><Card><Statistic title="API Key 数量" value={keysData?.total ?? 0} prefix={<KeyOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:87:<Col span={8}><Card><Statistic title="Webhook 数量" value={whData?.total ?? 0} prefix={<LinkOutlined />} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:88:<Col span={8}><Card><Statistic title="Webhook 失败数" value={whData?.webhooks?.reduce((s: number, w: { failure_count: number }) => s + w.failure_count, 0) ?? 0} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:91:<Tabs defaultActiveKey="keys" items={[{
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:92:key: "keys", label: "API Key",
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:95:<Button type="primary" icon={<PlusOutlined />} onClick={() => { setKeyModalOpen(true); setCreatedRawKey(""); }} style={{ marginBottom: 16 }}>创建 API Key</Button>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:97:<Table dataSource={keysData?.api_keys || []} columns={keyColumns} rowKey="id" pagination={false} size="middle" locale={{ emptyText: "暂无 API Key" }} />
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:100:<Space direction="vertical" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:102:<Select mode="tags" placeholder="权限" value={newKeyPerms} onChange={setNewKeyPerms} style={{ width: "100%" }} />
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:104:<Alert type="success" message={
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:105:<Space><Text copyable>{createdRawKey}</Text><Text type="danger">Save this key now - it won't be shown again!</Text></Space>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:113:key: "webhooks", label: "Webhook",
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:116:<Button type="primary" icon={<PlusOutlined />} onClick={() => setWhModalOpen(true)} style={{ marginBottom: 16 }}>新增 Webhook</Button>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:118:<Table dataSource={whData?.webhooks || []} columns={whColumns} rowKey="id" pagination={false} size="middle" locale={{ emptyText: "暂无 Webhook" }} />
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:121:<Space direction="vertical" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:122:<Input placeholder="Webhook URL" value={newWhUrl} onChange={(e) => setNewWhUrl(e.target.value)} />
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:123:<Select mode="tags" placeholder="事件" value={newWhEvents} onChange={setNewWhEvents} style={{ width: "100%" }} options={[
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:124:{ label: "task.completed", value: "task.completed" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:125:{ label: "task.failed", value: "task.failed" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:126:{ label: "artifact.created", value: "artifact.created" },
+E:\半自动工作台\frontend\src\pages\Developer\DeveloperConsole.tsx:127:{ label: "agent.failed", value: "agent.failed" },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:5:} from "antd"
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:35:if (e.key === "Enter") handleSearch()
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:42:message.success("Feedback submitted")
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:46:message.error("Failed to submit feedback")
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:53:{ title: "任务模式", dataIndex: "task_pattern", key: "pattern", render: (t: string) => <Text strong>{t}</Text> },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:54:{ title: "Agent", dataIndex: "agents", key: "agents", render: (a: string[]) => <Space size={4}>{a.map((x) => <Tag key={x}>{x}</Tag>)}</Space> },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:55:{ title: "结果", dataIndex: "success", key: "success", render: (s: boolean) => s ? <Tag color="green" icon={<CheckCircleOutlined />}>成功</Tag> : <Tag color="red" icon={<CloseCircleOutlined />}>失败</Tag> },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:56:{ title: "相关度", dataIndex: "score", key: "score", render: (s: number | undefined) => s !== undefined ? s.toFixed(2) : "-" },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:57:{ title: "时间", dataIndex: "created_at", key: "time", render: (t: string) => t ? new Date(t).toLocaleString() : "-" },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:108:<Button type="primary" onClick={handleSearch} icon={<SearchOutlined />}>搜索</Button>
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:116:<Space direction="vertical">
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:117:<Text>Recommended Agents: {recs.recommended_agents.map((a) => <Tag key={a} color="blue">{a}</Tag>)}</Text>
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:120:<Alert type="warning" message={recs.warnings.join("; ")} />
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:127:<div style={{ textAlign: "center", padding: 48 }}><Spin size="large" /></div>
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:130:<Table dataSource={searchData?.results || []} columns={searchCols} rowKey="task_pattern" pagination={false} size="middle" />
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:141:{ title: "任务模式", dataIndex: "pattern", key: "p" },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:142:{ title: "次数", dataIndex: "count", key: "c" },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:143:{ title: "成功率", dataIndex: "success_rate", key: "sr", render: (v: number) => <Progress percent={Math.round(v * 100)} size="small" /> },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:145:rowKey="pattern" pagination={false} size="small"
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:153:{ title: "Agent", dataIndex: "agent_id", key: "a" },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:154:{ title: "成功率", dataIndex: "success_rate", key: "sr", render: (v: number) => <Progress percent={Math.round(v * 100)} size="small" /> },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:155:{ title: "总数", dataIndex: "total", key: "t" },
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:157:rowKey="agent_id" pagination={false} size="small"
+E:\半自动工作台\frontend\src\pages\Experience\ExperienceExplorer.tsx:166:<Space direction="vertical" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:5:} from "antd"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:32:agent_selection: "blue",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:33:retry: "orange",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:34:workflow: "purple",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:35:bottleneck: "red",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:36:resource: "green",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:40:0: "default",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:41:1: "blue",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:42:2: "red",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:46:0: "Low",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:47:1: "Medium",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:48:2: "High",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:52:applied: "green",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:53:reverted: "orange",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:54:pending: "blue",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:93:status={analysis.task_analysis.success_rate >= 0.8 ? "success" : "active"}
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:118:type={b.severity === "high" ? "error" : "warning"}
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:133:{ title: "Agent", dataIndex: "agent_id", key: "agent_id" },
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:134:{ title: "执行次数", dataIndex: "executions", key: "executions" },
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:135:{ title: "错误数", dataIndex: "errors", key: "errors" },
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:138:dataIndex: "success_rate",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:139:key: "success_rate",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:141:<Progress percent={Math.round(v * 100)} size="small" status={v >= 0.8 ? "success" : "active"} />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:146:<Card title="Agent 表现" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:147:<Table columns={cols} dataSource={agents} rowKey="agent_id" pagination={false} size="small" />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:163:type="primary"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:164:size="small"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:175:<Text type="secondary">暂无优化建议，执行任务后将自动生成洞察。</Text>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:180:size="small"
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:184:<Tag color={categoryColors[rec.category] || "default"}>{rec.category}</Tag>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:190:<Button size="small" onClick={() => onApply([rec.id])} loading={loading}>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:196:<Text type="secondary">Expected: {rec.expected_impact}</Text>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:212:{ title: "标题", dataIndex: "title", key: "title", ellipsis: true },
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:215:dataIndex: "category",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:216:key: "category",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:218:render: (c: string) => <Tag color={categoryColors[c] || "default"}>{c}</Tag>,
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:222:dataIndex: "status",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:223:key: "status",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:225:render: (s: string) => <Badge status={s === "applied" ? "success" : "warning"} text={s} />,
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:229:dataIndex: "applied_at",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:230:key: "applied_at",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:232:render: (t: string) => t ? new Date(t).toLocaleString("zh-CN") : "-",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:236:key: "action",
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:239:r.status === "applied" ? (
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:240:<Button size="small" danger icon={<UndoOutlined />} onClick={() => onRevert(r.id)} loading={loading}>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:248:<Table columns={cols} dataSource={records} rowKey="id" pagination={{ pageSize: 10 }} size="small" />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:266:message.error("Apply failed")
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:273:message.success("Reverted")
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:275:message.error("Revert failed")
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:281:<div style={{ textAlign: "center", padding: 80 }}>
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:282:<Spin size="large" />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:289:return <Alert type="error" message="加载失败" description={error ? String(error) : "Unknown error"} showIcon />
+E:\半自动工作台\frontend\src\pages\Improvement\index.tsx:297:<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:1:import React, { useState } from "react";
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:2:import { Card, Typography, Input, Button, Upload, Table, Tag, Space, Modal, Tabs, Popconfirm, Spin, Empty, Descriptions } from "antd";
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:10:const TYPE_COLORS: Record<string, string> = { pdf: "red", markdown: "blue", txt: "default", code: "green", web: "orange" };
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:32:{ title: "标题", dataIndex: "title", key: "title", ellipsis: true },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:33:{ title: "类型", dataIndex: "doc_type", width: 100, render: (t: string) => <Tag color={TYPE_COLORS[t]}>{DOC_TYPE_LABELS[t] || t}</Tag> },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:34:{ title: "分块数", dataIndex: "chunk_count", width: 80 },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:35:{ title: "标签", dataIndex: "tags", width: 200, render: (tags: string[]) => tags?.map((t: string) => <Tag key={t}>{t}</Tag>) || null },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:36:{ title: "操作", key: "actions", width: 120, render: (_: unknown, r: KnowledgeDocument) => (
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:37:<Space><Button size="small" onClick={() => setViewDocId(r.id)}>查看</Button>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:38:<Popconfirm title="确定删除？" onConfirm={() => deleteMut.mutate(r.id)}><Button size="small" danger icon={<DeleteOutlined />} /></Popconfirm></Space>) },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:44:<Paragraph type="secondary">Upload documents, index web content, and search your personal knowledge.</Paragraph>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:45:<Tabs defaultActiveKey="docs" items={[
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:46:{ key: "docs", label: "文档", children: (docsData?.documents || []).length === 0 ? <Empty description="暂无文档" /> : (
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:47:<Table rowKey="id" dataSource={docsData?.documents || []} columns={columns} size="middle" onRow={(r) => ({ onClick: () => setViewDocId(r.id), style: { cursor: "pointer" } })} pagination={{ pageSize: 15 }} />) },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:48:{ key: "search", label: "搜索", children: (<>
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:55:<Table rowKey="chunk_id" dataSource={searchResults?.results || []} columns={[
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:56:{ title: "标题", dataIndex: "title", ellipsis: true },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:57:{ title: "内容", dataIndex: "content", ellipsis: true, render: (t: string) => t?.slice(0, 200) },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:58:{ title: "相关度", dataIndex: "score", width: 80, render: (v: number) => v?.toFixed(2) },
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:59:]} size="middle" pagination={{ pageSize: 15 }} />)}
+E:\半自动工作台\frontend\src\pages\KnowledgeBase\index.tsx:63:{viewDoc?.document && (<Descriptions column={1} bordered size="small">
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:46:<Paragraph type="secondary">登录你的账户</Paragraph>
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:52:layout="vertical"
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:53:size="large"
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:55:<Form.Item name="username" rules={[{ required: true, message: 'Please enter username' }]}>
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:56:<Input prefix={<UserOutlined />} placeholder="用户名" autoComplete="username" />
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:59:<Form.Item name="password" rules={[{ required: true, message: 'Please enter password' }]}>
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:60:<Input.Password prefix={<LockOutlined />} placeholder="密码" autoComplete="current-password" />
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:63:<Form.Item name="tenant_id">
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:66:<Select.Option value="tenant-default">默认租户</Select.Option>
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:71:<Button type="primary" htmlType="submit" loading={loading} block>
+E:\半自动工作台\frontend\src\pages\Login\index.tsx:77:<Paragraph type="secondary" style={{ textAlign: 'center', fontSize: 12 }}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:20:} from "antd"
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:45:profile: "purple",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:46:preference: "orange",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:47:project: "blue",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:48:knowledge: "green",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:49:experience: "cyan",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:52:const getTypeColor = (t: string) => TYPE_COLORS[t] || "default"
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:82:if (e.key === "Enter") handleSearch()
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:115:{ title: "内容", dataIndex: "content", key: "content", ellipsis: true, render: (text: string) => <Text>{text.length > 80 ? text.slice(0, 80) + "..." : text}</Text> },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:116:{ title: "类型", dataIndex: "memory_type", key: "type", width: 110, render: (t: string) => <Tag color={getTypeColor(t)}>{t}</Tag> },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:117:{ title: "重要度", dataIndex: "importance", key: "importance", width: 110, render: (v: number) => (v * 100).toFixed(0) + "%" },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:118:{ title: "标签", dataIndex: "tags", key: "tags", width: 200, render: (tags: string[]) => tags?.map((t: string) => <Tag key={t}>{t}</Tag>) || null },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:120:title: "操作", key: "actions", width: 160,
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:123:<Button size="small" icon={<EditOutlined />} onClick={() => openEdit(record)} />
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:125:<Button size="small" danger icon={<DeleteOutlined />} />
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:137:<Paragraph type="secondary">Your personal long-term memory. Profiles, preferences, projects, knowledge, and experiences.</Paragraph>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:139:<Tabs defaultActiveKey="all" items={[
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:141:key: "all",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:147:<Card size="small" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:152:<Text type="secondary">Total: {stats.data.total_memories}</Text>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:176:<Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>搜索</Button>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:178:<Button type="primary" icon={<PlusOutlined />} onClick={() => setAddModalOpen(true)}>新增记忆</Button>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:190:size="middle"
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:193:style: { cursor: "pointer" },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:203:key: "profile",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:205:children: <MemoryTypeList type="profile" loading={profileLoading} data={profile?.results || []} />,
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:208:key: "preferences",
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:210:children: <MemoryTypeList type="preference" loading={prefsLoading} data={preferences?.results || []} />,
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:216:<Form form={addForm} layout="vertical" initialValues={{ memory_type: "knowledge", importance: 0.5, tags: [] }}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:217:<Form.Item name="content" label="内容" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:220:<Form.Item name="memory_type" label="类型">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:223:<Form.Item name="importance" label="重要度">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:226:<Form.Item name="tags" label="标签">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:227:<Select mode="tags" placeholder="添加标签" />
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:234:<Form form={editForm} layout="vertical">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:235:<Form.Item name="content" label="内容" rules={[{ required: true }]}>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:238:<Form.Item name="memory_type" label="类型">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:241:<Form.Item name="importance" label="重要度">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:244:<Form.Item name="tags" label="标签">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:245:<Select mode="tags" />
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:253:<Descriptions column={1} bordered size="small">
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:256:<Descriptions.Item label="内容"><Paragraph style={{ whiteSpace: "pre-wrap" }}>{detailItem.content}</Paragraph></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:258:<Descriptions.Item label="标签">{detailItem.tags?.map((t) => <Tag key={t}>{t}</Tag>) || "None"}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:260:<Descriptions.Item label="Updated">{detailItem.updated_at}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:272:return loading ? <Spin /> : data.length === 0 ? <Empty description={"No " + type + " memories"} /> : (
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:274:{ title: "内容", dataIndex: "content", ellipsis: true },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:275:{ title: "重要度", dataIndex: "importance", width: 110, render: (v: number) => (v * 100).toFixed(0) + "%" },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:276:{ title: "标签", dataIndex: "tags", width: 200, render: (tags: string[]) => tags?.map((t: string) => <Tag key={t}>{t}</Tag>) },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:277:{ title: "创建时间", dataIndex: "created_at", width: 180, render: (d: string) => d?.slice(0, 19) },
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:279:title: "", key: "del", width: 60,
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:280:render: (_: unknown, r: MemoryItem) => <Popconfirm title="确定删除？" onConfirm={() => deleteMut.mutate(r.id)}><Button size="small" danger icon={<DeleteOutlined />} /></Popconfirm>
+E:\半自动工作台\frontend\src\pages\Memory\MemoryExplorer.tsx:282:]} size="middle" pagination={{ pageSize: 15 }} />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:13:if (isLoading) return <div style={{ padding: 48, textAlign: 'center' }}><Spin size="large" /><p>正在加载监控数据...</p></div>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:14:if (error) return <Alert type="error" message="加载监控数据失败" description={String(error)} />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:22:<Card><Statistic title="CPU" value={allMetrics?.cpu?.percent ?? 0} suffix="%" precision={1} prefix={<ThunderboltOutlined />} /></Card>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:31:<Card><Statistic title="运行时长" value={Math.round((allMetrics?.runtime?.uptime_seconds ?? 0) / 60)} suffix="min" /></Card>
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:39:<Progress percent={Math.round((taskMetrics?.success_rate ?? 0) * 100)} status="active" />
+E:\半自动工作台\frontend\src\pages\Metrics\MetricsDashboard.tsx:50:<Card title="Agent">
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:6:} from "antd"
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:26:ollama: "Ollama",
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:27:llama_cpp: "llama.cpp",
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:28:openai_compatible: "OpenAI Compatible",
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:32:ollama: "green",
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:33:llama_cpp: "blue",
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:34:openai_compatible: "purple",
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:45:const [editProvider, setEditProvider] = useState("ollama")
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:52:const [genCategory, setGenCategory] = useState("chat")
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:62:message.success("Configured")
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:65:message.error("Configure failed")
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:73:message.success(res.connected ? "Connected" : "Failed")
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:88:message.error("Generate failed")
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:93:return <div style={{ textAlign: "center", padding: 80 }}><Spin size="large" /></div>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:104:{ title: "任务分类", dataIndex: "category", key: "category", width: 120,
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:106:{ title: "模型", dataIndex: "model", key: "model", render: (_: unknown, r: [string, RoutingTableEntry]) => r[1].model_name },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:108:title: "服务提供方", dataIndex: "provider", key: "provider", width: 160,
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:113:{ title: "隐私级别", dataIndex: "privacy", key: "privacy", width: 80,
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:115:{ title: "成本", dataIndex: "cost", key: "cost", width: 80,
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:121:<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:127:<Button type="primary" icon={<ApiOutlined />} onClick={() => setModalOpen(true)}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:133:{error ? <Alert type="error" message="加载失败" showIcon /> : null}
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:143:size="small"
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:151:<Card size="small">
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:157:<Text type="secondary" style={{ fontSize: 12 }}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:169:{["ollama", "llama_cpp", "openai_compatible"].map((pt) => {
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:173:<Card key={pt} size="small" style={{ marginBottom: 8 }}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:174:<Space direction="vertical" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:177:{testOk === true ? <Badge status="success" text="已连接" /> : testOk === false ? <Badge status="error" text="失败" /> : <Badge status="default" text="未知" />}
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:179:{config?.endpoint ? <Text type="secondary" style={{ fontSize: 12 }}>接口地址: {config.endpoint}</Text> : null}
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:181:<Button size="small" onClick={() => handleTest(pt)} loading={testMut.isPending}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:184:<Button size="small" onClick={() => { setEditProvider(pt); setEdit接口地址(config?.endpoint || ""); setModalOpen(true) }}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:195:<Button size="small" icon={<PlayCircleOutlined />} onClick={() => setGenerateOpen(true)}>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:200:<Alert type="success" message="已生成" description={genResult.slice(0, 300)} />
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:202:<Text type="secondary">点击生成以测试模型。</Text>
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:215:<Space direction="vertical" style={{ width: "100%" }} size="middle">
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:223:{ value: "ollama", label: "Ollama" },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:224:{ value: "llama_cpp", label: "llama.cpp" },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:225:{ value: "openai_compatible", label: "OpenAI Compatible" },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:232:placeholder="http://localhost:11434"
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:240:placeholder="sk-..."
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:255:<Space direction="vertical" style={{ width: "100%" }} size="middle">
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:263:{ value: "chat", label: "对话" },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:264:{ value: "coding", label: "编程" },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:265:{ value: "research", label: "研究" },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:266:{ value: "writing", label: "写作" },
+E:\半自动工作台\frontend\src\pages\ModelSettings\index.tsx:267:{ value: "analysis", label: "分析" },
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:1:import React from "react"
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:2:import { Card, Col, Row, Statistic, Typography, Tag, Alert, Spin, Progress } from "antd"
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:41:<Text key={i} type="secondary" style={{ display: "block", fontSize: 13 }}>
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:45:<Tag color={moodColors[summary.mood] || "default"} style={{ marginTop: 8 }}>
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:46:{summary.mood === "productive" ? "高效模式" : "待命中"}
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:56:achievement: { color: "green", icon: <TrophyOutlined /> },
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:57:warning: { color: "red", icon: <WarningOutlined /> },
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:58:tip: { color: "blue", icon: <BulbOutlined /> },
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:59:suggestion: { color: "purple", icon: <InfoCircleOutlined /> },
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:67:<Text type="secondary">暂无洞察</Text>
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:70:const cfg = typeConfig[insight.type] || { color: "default", icon: null }
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:74:type={insight.type === "warning" ? "warning" : "info"}
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:138:status={successPercent >= 80 ? "success" : successPercent >= 50 ? "active" : "exception"}
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:204:<div style={{ textAlign: "center", padding: 80 }}>
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:205:<Spin size="large" />
+E:\半自动工作台\frontend\src\pages\PersonalDashboard\index.tsx:214:type="error"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:1:import React, { useState } from "react"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:6:} from "antd"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:12:import { useNavigate } from "react-router-dom"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:60:<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:64:<Tag color="green">v5.10</Tag>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:68:<Card style={{ marginBottom: 16, background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)" }}>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:71:size="large"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:80:type="primary"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:81:size="large"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:90:<Text style={{ color: "rgba(255,255,255,0.8)", fontSize: 12, marginTop: 8, display: "block" }}>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:100:<Card size="small">
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:110:<Card size="small">
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:119:<Card size="small">
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:128:<Card size="small">
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:131:value={state?.overall_health ?? "healthy"}
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:132:prefix={<Badge status={state?.overall_health === "healthy" ? "success" : "warning"} />}
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:141:<Descriptions size="small" column={2} style={{ marginBottom: 12 }}>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:144:<Tag color="blue">{actionLabels[lastResult.decision.action] || lastResult.decision.action}</Tag>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:150:size="small"
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:151:current={lastResult.steps.filter((s: OrchestrationStep) => s.status === "completed").length}
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:154:status: s.status === "failed" ? "error" : s.status === "completed" ? "finish" : s.status === "skipped" ? "wait" : "process",
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:155:description: s.status === "completed" ? `${s.duration_ms.toFixed(0)}ms` : s.error || "",
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:159:<Button type="link" onClick={() => navigate(`/tasks/${lastResult.task_id}`)} style={{ marginTop: 8 }}>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:171:{ color: "green", children: `${state?.agents_available ?? 0} 个 Agent 可用` },
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:172:{ color: "blue", children: `${state?.tasks_running ?? 0} 个任务运行中` },
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:173:{ color: "orange", children: `${state?.tasks_queued ?? 0} 个任务排队中` },
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:174:{ color: "purple", children: `${state?.automations_running ?? 0} 个自动化活动` },
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:187:type={s.type === "action" ? "info" : s.type === "tip" ? "success" : "warning"}
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:197:<Space direction="vertical" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:217:<div key={name} style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+E:\半自动工作台\frontend\src\pages\PersonalOS\index.tsx:219:<Badge status="success" text={String(s)} />
+E:\半自动工作台\frontend\src\pages\Planning\AgentSelectionPanel.tsx:36:render: (a: string) => <Tag color="blue">{a}</Tag>,
+E:\半自动工作台\frontend\src\pages\Planning\AgentSelectionPanel.tsx:46:: <Text type="secondary">-</Text>
+E:\半自动工作台\frontend\src\pages\Planning\AgentSelectionPanel.tsx:61:size="small"
+E:\半自动工作台\frontend\src\pages\Planning\AgentSelectionPanel.tsx:63:<Table dataSource={data} columns={columns} rowKey="step_id" size="small" pagination={false} />
+E:\半自动工作台\frontend\src\pages\Planning\PlanningConsole.tsx:32:<Space direction="vertical" size="large" style={{ width: '100%' }}>
+E:\半自动工作台\frontend\src\pages\Planning\PlanningConsole.tsx:38:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningConsole.tsx:55:type="primary"
+E:\半自动工作台\frontend\src\pages\Planning\PlanningConsole.tsx:71:type="error"
+E:\半自动工作台\frontend\src\pages\Planning\PlanningConsole.tsx:78:{debugMutation.isPending && <Spin size="large" style={{ display: 'block', margin: '40px auto' }} />}
+E:\半自动工作台\frontend\src\pages\Planning\PlanningHistory.tsx:59:render: (f: boolean) => f ? <Tag color="warning">是</Tag> : <Tag>否</Tag>,
+E:\半自动工作台\frontend\src\pages\Planning\PlanningHistory.tsx:66:record.error ? <Tag color="error">错误</Tag> : <Tag color="success">成功</Tag>,
+E:\半自动工作台\frontend\src\pages\Planning\PlanningHistory.tsx:79:size="small"
+E:\半自动工作台\frontend\src\pages\Planning\PlanningHistory.tsx:84:rowKey="session_id"
+E:\半自动工作台\frontend\src\pages\Planning\PlanningHistory.tsx:85:size="small"
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:28:<Space direction="vertical" size="middle" style={{ width: '100%' }}>
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:30:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:31:<Descriptions column={2} size="small">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:51:<Tag icon={<ThunderboltOutlined />} color="warning">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:55:<Tag icon={<CheckCircleOutlined />} color="success">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:65:<Tag icon={<ExclamationCircleOutlined />} color="error">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:69:<Tag icon={<CheckCircleOutlined />} color="success">
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:78:<Alert message="规划错误" description={session.error} type="error" showIcon />
+E:\半自动工作台\frontend\src\pages\Planning\PlanningResult.tsx:82:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Planning\PlanStepsPanel.tsx:53:render: (a: string) => a ? <Tag color="blue">{a}</Tag> : <Text type="secondary">-</Text>,
+E:\半自动工作台\frontend\src\pages\Planning\PlanStepsPanel.tsx:63:: <Text type="secondary">-</Text>,
+E:\半自动工作台\frontend\src\pages\Planning\PlanStepsPanel.tsx:81:size="small"
+E:\半自动工作台\frontend\src\pages\Planning\PlanStepsPanel.tsx:87:size="small"
+E:\半自动工作台\frontend\src\pages\Planning\PromptPanel.tsx:14:<Card title="提示词" size="small" extra={<FileTextOutlined />}>
+E:\半自动工作台\frontend\src\pages\Planning\PromptPanel.tsx:16:size="small"
+E:\半自动工作台\frontend\src\pages\Planning\RawResponsePanel.tsx:14:<Card title="LLM 原始响应" size="small" extra={<CodeOutlined />}>
+E:\半自动工作台\frontend\src\pages\Planning\RawResponsePanel.tsx:16:size="small"
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:61:<Paragraph type="secondary">
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:66:<Space direction="vertical" size="middle" style={{ width: '100%' }}>
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:70:placeholder='e.g. "Analyze 2026 AI Agent market trends"'
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:87:type="primary"
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:91:size="large"
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:101:<Spin size="large" />
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:103:<Tag color="processing">正在搜索网页...</Tag>
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:104:<Tag color="processing">正在提取信息...</Tag>
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:105:<Tag color="processing">正在生成报告...</Tag>
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:113:<Text type="danger">{error}</Text>
+E:\半自动工作台\frontend\src\pages\Research\ResearchConsole.tsx:122:extra={<Tag color="green">已完成</Tag>}
+E:\半自动工作台\frontend\src\pages\Research\SourceList.tsx:31:<a href={item.url} target="_blank" rel="noopener noreferrer">
+E:\半自动工作台\frontend\src\pages\Research\SourceList.tsx:38:{item.snippet && <Text type="secondary" style={{ fontSize: 12 }}>{item.snippet}</Text>}
+E:\半自动工作台\frontend\src\pages\Research\SourceList.tsx:42:<Text type="secondary" style={{ fontSize: 11 }}>
+E:\半自动工作台\frontend\src\pages\Research\SourceList.tsx:48:<Tag color="blue" style={{ fontSize: 10 }}>
+E:\半自动工作台\frontend\src\pages\Research\WriterPreview.tsx:33:return <Paragraph key={i} type="secondary">{line.replace(/\*/g, '')}</Paragraph>
+E:\半自动工作台\frontend\src\pages\Research\WriterPreview.tsx:49:size="small"
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:28:<Spin size="large" />
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:35:return <Alert type="error" message="加载系统状态失败" description={String(healthError)} />
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:42:<Space direction="vertical" size="large" style={{ width: '100%' }}>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:58:<Descriptions.Item label="PostgreSQL">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:61:<Descriptions.Item label="Redis">
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:65:<Descriptions.Item label="就绪状态">{readiness?.ready ? <Tag color="green">就绪</Tag> : <Tag color="red">未就绪</Tag>}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:71:<Descriptions.Item label="Running">{info?.active_tasks ?? 0}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\System\SystemStatus.tsx:72:<Descriptions.Item label="Queued">{info?.queued_tasks ?? 0}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:1:import { useState } from "react"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:2:import { Card, List, Tag, Typography, Empty, Space, Spin, Button, Modal, Descriptions, Popconfirm, message, Image } from "antd"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:16:import { useNavigate } from "react-router-dom"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:21:text: { color: "blue", icon: <FileTextOutlined /> },
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:22:markdown: { color: "purple", icon: <FileTextOutlined /> },
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:23:json: { color: "green", icon: <CodeOutlined /> },
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:24:list: { color: "orange", icon: <OrderedListOutlined /> },
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:25:url: { color: "cyan", icon: <LinkOutlined /> },
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:26:image_url: { color: "magenta", icon: <PictureOutlined /> },
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:31:case "url":
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:33:<a href={artifact.content} target="_blank" rel="noreferrer">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:37:case "image_url":
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:39:case "json":
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:43:<pre style={{ background: "#f6f8fa", padding: 12, borderRadius: 6, fontSize: 12, maxHeight: 300, overflow: "auto" }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:50:case "list":
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:56:size="small"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:61:<Text>{typeof item === "string" ? item : JSON.stringify(item)}</Text>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:69:case "markdown":
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:71:<pre style={{ background: "#f6f8fa", padding: 12, borderRadius: 6, fontSize: 13, whiteSpace: "pre-wrap", maxHeight: 400, overflow: "auto" }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:88:{agentId && <Tag color="blue">Agent: {agentId}</Tag>}
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:89:{stepId && <Tag color="green">Step: {stepId}</Tag>}
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:91:<Tag color="default" style={{ cursor: "pointer" }} onClick={() => navigate(`/tasks/${taskId}`)}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:100:const cfg = typeConfig[artifact.type] || { color: "default", icon: <FileUnknownOutlined /> }
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:105:size="small"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:115:<Button size="small" icon={<EyeOutlined />} onClick={() => onView(artifact)} />
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:122:<Button size="small" danger icon={<DeleteOutlined />} loading={deleteMutation.isPending} />
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:147:return <Spin style={{ display: "block", margin: "40px auto" }} />
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:152:<Space direction="vertical" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:153:<Text type="error">加载产物失败</Text>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:162:<Space direction="vertical" size="middle" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:163:<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:167:<Button icon={<ReloadOutlined />} size="small" onClick={() => refetch()}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:182:title={viewing?.name || "Artifact Detail"}
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:189:<Space direction="vertical" size="middle" style={{ width: "100%" }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:190:<Descriptions column={2} size="small" bordered>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:192:<Descriptions.Item label="类型"><Tag color={typeConfig[viewing.type]?.color || "default"}>{viewing.type}</Tag></Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ArtifactPanel.tsx:195:<Descriptions.Item label="创建时间" span={2}>{new Date(viewing.created_at).toLocaleString("zh-CN")}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:20:case 'excellent': return <Tag color="success" icon={<CheckCircleOutlined />}>优秀</Tag>
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:21:case 'good': return <Tag color="processing">良好</Tag>
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:22:case 'fair': return <Tag color="warning" icon={<WarningOutlined />}>一般</Tag>
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:23:case 'poor': return <Tag color="error">较差</Tag>
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:41:size="small"
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:45:type="dashboard"
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:52:<Text type="secondary">/10</Text>
+E:\半自动工作台\frontend\src\pages\TaskDetail\EvaluationPanel.tsx:70:<Tag key={i} color="warning" style={{ marginBottom: 4 }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:51:<Text type="secondary">当 AI 在任务执行期间做出决策时，会记录执行轨迹。</Text>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:63:<Card size="small" style={{ marginBottom: 16, background: '#f6ffed' }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:69:<Text type="secondary" style={{ fontSize: 12 }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:77:<Card title={<Space><ThunderboltOutlined /> Execution Trace</Space>} size="small">
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:79:direction="vertical"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:80:size="small"
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:94:<Card size="small" style={{ background: '#fafafa' }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:95:<Descriptions size="small" column={1}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\ExecutionTracePanel.tsx:117:<Text type="secondary" style={{ fontSize: 11 }}>{trace.created_at}</Text>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:71:return <div style={{ textAlign: 'center', padding: 80 }}><Spin size="large" /></div>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:110:<Col xs={12} sm={6}><Card size="small"><Statistic title="状态" value={task.execution.status} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:111:<Col xs={12} sm={6}><Card size="small"><Statistic title="耗时" value={task.execution.duration_ms} suffix="ms" /></Card></Col>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:112:<Col xs={12} sm={6}><Card size="small"><Statistic title="成功步骤" value={task.execution.success_count} valueStyle={{ color: '#3f8600' }} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:113:<Col xs={12} sm={6}><Card size="small"><Statistic title="失败步骤" value={task.execution.failed_count} valueStyle={task.execution.failed_count > 0 ? { color: '#cf1322' } : undefined} /></Card></Col>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:118:defaultActiveKey="timeline"
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:126:<Card title="执行时间线" size="small">
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:164:<Card title={WebSocket事件 ()} size="small" style={{ marginTop: 16 }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:168:<Tag color="blue">{e.event}</Tag>
+E:\半自动工作台\frontend\src\pages\TaskDetail\TaskDetail.tsx:169:<Text type="secondary">{new Date(e.timestamp).toLocaleTimeString('zh-CN')}</Text>
+E:\半自动工作台\frontend\src\pages\TaskDetail\Timeline.tsx:55:{e.duration_ms > 0 && <Text type="secondary">{e.duration_ms}ms</Text>}
+E:\半自动工作台\frontend\src\pages\TaskDetail\Timeline.tsx:57:<Text type="secondary" style={{ fontSize: 12 }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\Timeline.tsx:79:<Text type="secondary" style={{ fontSize: 12, marginLeft: 8 }}>
+E:\半自动工作台\frontend\src\pages\TaskDetail\Timeline.tsx:101:return <AntTimeline items={items} mode="left" />
+E:\半自动工作台\frontend\src\pages\TaskDetail\TracePanel.tsx:84:size="small"
+E:\半自动工作台\frontend\src\pages\TaskDetail\TracePanel.tsx:90:size="small"
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:41:extra={<Button icon={<CloseOutlined />} size="small" onClick={onClose} />}
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:42:size="small"
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:44:<Descriptions column={1} size="small">
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:49:<Descriptions.Item label="Agent">
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:50:<Tag color="blue">{step.agent}</Tag>
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:55:: <Text type="secondary">无</Text>
+E:\半自动工作台\frontend\src\pages\Workflow\StepDetailPanel.tsx:69:<Text type="danger">{step.error}</Text>
+E:\半自动工作台\frontend\src\pages\Workflow\StepNode.tsx:52:<Text type="secondary" style={{ fontSize: 10 }}>{data.duration}ms</Text>
+E:\半自动工作台\frontend\src\pages\Workflow\WorkflowViewer.tsx:104:size="small"
+E:\半自动工作台\frontend\src\pages\Workflow\WorkflowViewer.tsx:115:attributionPosition="bottom-left"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:1:import { Table, Tag, Space, Button, Popconfirm, Typography, Empty } from "antd"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:16:case "text": return <FileTextOutlined />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:17:case "markdown": return <FileTextOutlined />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:18:case "json":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:19:case "dict": return <CodeOutlined />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:20:case "list": return <UnorderedListOutlined />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:21:case "image_url": return <PictureOutlined />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:28:case "text": return "blue"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:29:case "markdown": return "purple"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:30:case "json":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:31:case "dict": return "green"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:32:case "list": return "orange"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:33:case "image_url": return "magenta"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:34:case "url": return "cyan"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:35:default: return "default"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:47:dataIndex: "name",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:48:key: "name",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:58:dataIndex: "type",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:59:key: "type",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:64:title: "Agent",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:65:key: "agent",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:69:return <Tag color="blue">{agent}</Tag>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:74:key: "step",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:78:return step ? <Tag color="green">{step}</Tag> : <Text type="secondary">-</Text>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:83:dataIndex: "created_at",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:84:key: "created_at",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:86:render: (t: string) => new Date(t).toLocaleString("zh-CN"),
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:90:key: "actions",
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:94:<Button size="small" icon={<EyeOutlined />} onClick={() => onView(record)}>查看</Button>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:96:<Button size="small" danger icon={<DeleteOutlined />} />
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactList.tsx:108:size="small"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:1:import { Card, Descriptions, Tag, Typography, Button, Space, Collapse, Empty, Image } from "antd"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:3:import { useNavigate } from "react-router-dom"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:16:return <Text type="secondary">(empty)</Text>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:19:case "text":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:21:<Card size="small" style={{ background: "#fafafa", maxHeight: 400, overflow: "auto" }}>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:22:<Paragraph style={{ whiteSpace: "pre-wrap", margin: 0 }}>{String(content)}</Paragraph>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:25:case "markdown":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:27:<pre style={{ background: "#f6f8fa", padding: 12, borderRadius: 6, fontSize: 13, whiteSpace: "pre-wrap", maxHeight: 400, overflow: "auto" }}>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:31:case "json":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:32:case "dict":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:34:<Card size="small" style={{ background: "#fafafa", maxHeight: 400, overflow: "auto" }}>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:36:{typeof content === "string" ? (() => { try { return JSON.stringify(JSON.parse(content), null, 2) } catch { return content } })() : JSON.stringify(content, null, 2)}
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:40:case "list":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:42:<Card size="small" style={{ background: "#fafafa", maxHeight: 400, overflow: "auto" }}>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:45:{content.map((c, i) => <li key={i}>{typeof c === "object" ? JSON.stringify(c) : String(c)}</li>)}
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:52:case "image_url":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:54:case "url":
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:55:return <a href={String(content)} target="_blank" rel="noreferrer">{String(content)}</a>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:58:<Card size="small" style={{ background: "#fafafa" }}>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:59:<pre>{typeof content === "string" ? content : JSON.stringify(content, null, 2)}</pre>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:79:extra={<Button icon={<CloseOutlined />} onClick={onClose} size="small" />}
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:80:size="small"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:82:<Descriptions column={1} size="small" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:85:<Descriptions.Item label="创建时间">{new Date(item.created_at).toLocaleString("zh-CN")}</Descriptions.Item>
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:86:{sourceAgentId && <Descriptions.Item label="来源 Agent"><Tag color="blue">{sourceAgentId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:87:{sourceStepId && <Descriptions.Item label="来源步骤"><Tag color="green">{sourceStepId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:91:type="link"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:92:size="small"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:104:size="small"
+E:\半自动工作台\frontend\src\pages\Workspace\ArtifactViewer.tsx:107:key: "meta",
+E:\半自动工作台\frontend\src\pages\Workspace\Workspace.tsx:40:return <div style={{ textAlign: 'center', padding: 80 }}><Spin size="large" /></div>
+E:\半自动工作台\frontend\src\pages\Workspace\Workspace.tsx:67:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Workspace\Workspace.tsx:68:<Statistic title="Artifact 数量" value={items.length} prefix={<FileOutlined />} />
+E:\半自动工作台\frontend\src\pages\Workspace\Workspace.tsx:72:<Card size="small">
+E:\半自动工作台\frontend\src\pages\Workspace\Workspace.tsx:81:<Card title="Artifact 列表" size="small">
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:1:import { Card, Descriptions, Tag, Typography, Button, Space, Collapse, Empty, Image } from "antd"
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:3:import { useNavigate } from "react-router-dom"
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:25:return <Text type="secondary">(empty)</Text>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:27:const str = typeof content === "string" ? content : JSON.stringify(content)
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:29:case "url":
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:30:return <a href={str} target="_blank" rel="noreferrer">{str}</a>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:31:case "image_url":
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:33:case "json":
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:35:return <pre style={{ background: "#f6f8fa", padding: 12, borderRadius: 6, fontSize: 12, maxHeight: 300, overflow: "auto" }}>{JSON.stringify(JSON.parse(str), null, 2)}</pre>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:39:case "list":
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:43:return <ol style={{ margin: 0, paddingLeft: 20 }}>{items.map((c: unknown, i: number) => <li key={i}>{typeof c === "string" ? c : JSON.stringify(c)}</li>)}</ol>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:47:case "markdown":
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:48:return <pre style={{ background: "#f6f8fa", padding: 12, borderRadius: 6, fontSize: 13, whiteSpace: "pre-wrap", maxHeight: 400, overflow: "auto" }}>{str}</pre>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:66:extra={onClose ? <Button icon={<CloseOutlined />} onClick={onClose} size="small" /> : null}
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:67:size="small"
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:69:<Descriptions column={1} size="small" style={{ marginBottom: 16 }}>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:72:<Descriptions.Item label="创建时间">{new Date(item.created_at).toLocaleString("zh-CN")}</Descriptions.Item>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:73:{sourceAgentId && <Descriptions.Item label="Agent"><Tag color="blue">{sourceAgentId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:74:{sourceStepId && <Descriptions.Item label="步骤"><Tag color="green">{sourceStepId}</Tag></Descriptions.Item>}
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:77:<Button type="link" size="small" icon={<LinkOutlined />} onClick={() => navigate(`/tasks/${sourceTaskId}`)}>{sourceTaskId}</Button>
+E:\半自动工作台\frontend\src\components\artifacts\ArtifactViewer.tsx:82:<Collapse size="small" style={{ marginBottom: 16 }} items={[{ key: "meta", label: `Metadata (${Object.keys(item.metadata).length})`, children: <pre style={{ fontSize: 12, margin: 0 }}>{JSON.stringify(item.metadata, null, 2)}</pre> }]} />
+E:\半自动工作台\frontend\src\components\Layout\index.tsx:63:theme="dark"
+E:\半自动工作台\frontend\src\components\Layout\index.tsx:77:theme="dark"
+E:\半自动工作台\frontend\src\components\Layout\index.tsx:78:mode="inline"

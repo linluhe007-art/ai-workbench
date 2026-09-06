@@ -1,4 +1,4 @@
-﻿import axios from 'axios'
+import axios from 'axios'
 
 const apiClient = axios.create({
   baseURL: '/api/v1',
@@ -9,7 +9,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token')
   if (token) {
-    config.headers.Authorization = Bearer 
+    config.headers.Authorization = `Bearer ${token}`
   }
   return config
 })

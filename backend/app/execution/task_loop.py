@@ -1,11 +1,7 @@
 """
-TaskLoopManager — 自主任务执行循环。
-当执行失败时自动重新规划并重试，直到成功或达到最大迭代次数。
-整合 Planner、PipelineExecutor、FeedbackManager、RePlanner、History。
-Phase 3.17: 整合 Evaluator 质量评估。
-Phase 3.18: 集成 TraceCollector，记录 iteration/evaluation/replan 事件。
-"""
+TaskLoopManager 鈥?鑷富浠诲姟鎵ц寰幆銆?褰撴墽琛屽け璐ユ椂鑷姩閲嶆柊瑙勫垝骞堕噸璇曪紝鐩村埌鎴愬姛鎴栬揪鍒版渶澶ц凯浠ｆ鏁般€?鏁村悎 Planner銆丳ipelineExecutor銆丗eedbackManager銆丷ePlanner銆丠istory銆?Phase 3.17: 鏁村悎 Evaluator 璐ㄩ噺璇勪及銆?Phase 3.18: 闆嗘垚 TraceCollector锛岃褰?iteration/evaluation/replan 浜嬩欢銆?"""
 
+import asyncio
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING
@@ -22,13 +18,15 @@ if TYPE_CHECKING:
     from app.planning.replanner import RePlanner
     from app.evaluation.evaluator import Evaluator as EvaluatorType
     from app.observability.collector import TraceCollector
+    from app.artifacts.extractor import ArtifactExtractor
+    from app.workspace.manager import WorkspaceManager
 
 logger = get_logger(__name__)
 
 
 @dataclass
 class IterationRecord:
-    """单次迭代记录"""
+    """鍗曟杩唬璁板綍"""
     iteration: int
     plan: TaskPlan
     success: bool
@@ -49,13 +47,9 @@ class IterationRecord:
 @dataclass
 class LoopResult:
     """
-    循环执行结果。
-    字段：
-    - success: 最终是否成功
-    - iterations: 总迭代次数
-    - final_result: 最终 ExecutionResult
-    - history: 每次迭代记录
-    - task_id: 任务 ID
+    寰幆鎵ц缁撴灉銆?    瀛楁锛?    - success: 鏈€缁堟槸鍚︽垚鍔?    - iterations: 鎬昏凯浠ｆ鏁?    - final_result: 鏈€缁?ExecutionResult
+    - history: 姣忔杩唬璁板綍
+    - task_id: 浠诲姟 ID
     """
     success: bool
     iterations: int
@@ -75,17 +69,12 @@ class LoopResult:
 
 class TaskLoopManager:
     """
-    自主任务执行循环管理器。
-    流程：
-    1. Planner 生成 TaskPlan
-    2. PipelineExecutor 执行（含 Recovery）
-    3. FeedbackManager 分析结果
-    4. 成功 → 返回
-    5. 失败 → RePlanner 重新规划 → 回到 2
-    6. 达到 max_iterations → 返回最后一次结果
-    用法：
-        loop = TaskLoopManager(planner, executor, replanner)
-        result = await loop.run("研究AI趋势并写报告", max_iterations=3)
+    鑷富浠诲姟鎵ц寰幆绠＄悊鍣ㄣ€?    娴佺▼锛?    1. Planner 鐢熸垚 TaskPlan
+    2. PipelineExecutor 鎵ц锛堝惈 Recovery锛?    3. FeedbackManager 鍒嗘瀽缁撴灉
+    4. 鎴愬姛 鈫?杩斿洖
+    5. 澶辫触 鈫?RePlanner 閲嶆柊瑙勫垝 鈫?鍥炲埌 2
+    6. 杈惧埌 max_iterations 鈫?杩斿洖鏈€鍚庝竴娆＄粨鏋?    鐢ㄦ硶锛?        loop = TaskLoopManager(planner, executor, replanner)
+        result = await loop.run("鐮旂┒AI瓒嬪娍骞跺啓鎶ュ憡", max_iterations=3)
     """
 
     def __init__(
@@ -97,6 +86,10 @@ class TaskLoopManager:
         evaluator: "EvaluatorType | None" = None,
         quality_threshold: float = 7.0,
         trace_collector: "TraceCollector | None" = None,
+        cancel_event: asyncio.Event | None = None,
+        pause_event: asyncio.Event | None = None,
+        artifact_extractor: "ArtifactExtractor | None" = None,
+        workspace_manager: "WorkspaceManager | None" = None,
     ):
         self._planner = planner
         self._executor = executor
@@ -106,9 +99,13 @@ class TaskLoopManager:
         self._history = history or ExecutionHistory()
         self._quality_threshold = quality_threshold
         self._trace = trace_collector
+        self._cancel_event = cancel_event
+        self._pause_event = pause_event
+        self._artifact_extractor = artifact_extractor
+        self._workspace = workspace_manager
 
     def set_trace_collector(self, collector: "TraceCollector"):
-        """注入 TraceCollector 实例"""
+        """娉ㄥ叆 TraceCollector 瀹炰緥"""
         self._trace = collector
 
     async def run(
@@ -117,11 +114,9 @@ class TaskLoopManager:
         max_iterations: int = 5,
     ) -> LoopResult:
         """
-        执行自主任务循环。
-        Args:
-            task: 用户任务描述
-            max_iterations: 最大迭代次数
-        Returns:
+        鎵ц鑷富浠诲姟寰幆銆?        Args:
+            task: 鐢ㄦ埛浠诲姟鎻忚堪
+            max_iterations: 鏈€澶ц凯浠ｆ鏁?        Returns:
             LoopResult
         """
         from app.observability.collector import TraceCollector
@@ -143,13 +138,24 @@ class TaskLoopManager:
             if self._trace:
                 self._trace.metric(trace_id, task_id, "loop", "iteration", iteration)
 
-            # 执行
+            # 鎵ц
+            # Check cancel
+            if self._cancel_event and self._cancel_event.is_set():
+                logger.info("Task loop cancelled", task_id=task_id)
+                break
+
+            # Check pause
+            if self._pause_event and not self._pause_event.is_set():
+                logger.info("Task loop paused", task_id=task_id)
+                await self._pause_event.wait()
+                logger.info("Task loop resumed", task_id=task_id)
+
             result = await self._executor.execute_with_recovery(current_plan)
 
-            # 分析反馈
+            # 鍒嗘瀽鍙嶉
             feedback = self._feedback_mgr.analyze(result)
 
-            # 记录
+            # 璁板綍
             record = IterationRecord(
                 iteration=iteration,
                 plan=current_plan,
@@ -160,7 +166,7 @@ class TaskLoopManager:
             )
             iteration_history.append(record)
 
-            # 记录到历史
+            # 璁板綍鍒板巻鍙?
             self._history.record(
                 task_id=task_id,
                 iteration=iteration,
@@ -172,7 +178,7 @@ class TaskLoopManager:
                 failed_steps=feedback.failed_steps,
             )
 
-            # 评估质量
+            # 璇勪及璐ㄩ噺
             eval_result = None
             if self._evaluator:
                 eval_result = await self._evaluator.evaluate(task, result)
@@ -182,9 +188,12 @@ class TaskLoopManager:
                 if self._trace:
                     self._trace.metric(trace_id, task_id, "loop", "eval_score", eval_result.score)
 
-            # 成功且质量达标 → 返回
+            # 鎴愬姛涓旇川閲忚揪鏍?鈫?杩斿洖
             if feedback.success and (not eval_result or eval_result.score >= self._quality_threshold):
                 logger.info("Task loop succeeded", task_id=task_id, iterations=iteration)
+
+                # Extract artifacts and save to workspace
+                await self._extract_and_save_artifacts(task_id, result)
 
                 # Trace: loop end (success)
                 if self._trace:
@@ -199,7 +208,7 @@ class TaskLoopManager:
                     evaluation=eval_result,
                 )
 
-            # 最后一次迭代 → 返回失败
+            # 鏈€鍚庝竴娆¤凯浠?鈫?杩斿洖澶辫触
             if iteration >= max_iterations:
                 logger.info("Task loop max iterations reached", task_id=task_id, iterations=iteration)
 
@@ -215,7 +224,7 @@ class TaskLoopManager:
                     task_id=task_id,
                 )
 
-            # 重新规划
+            # 閲嶆柊瑙勫垝
             if self._replanner:
                 # Trace: replan
                 if self._trace:
@@ -226,13 +235,36 @@ class TaskLoopManager:
             else:
                 logger.info("No replanner, retrying same plan", iteration=iteration + 1)
 
-        # 不应到达这里
+        # 涓嶅簲鍒拌揪杩欓噷
         return LoopResult(
             success=False,
             iterations=max_iterations,
             history=iteration_history,
             task_id=task_id,
         )
+
+    async def _extract_and_save_artifacts(self, task_id: str, result) -> None:
+        """Extract artifacts from execution result and save to workspace."""
+        if not self._artifact_extractor or not self._workspace:
+            return
+        try:
+            artifacts = await self._artifact_extractor.extract(task_id, result)
+            if artifacts:
+                # Ensure workspace exists
+                self._workspace.create_workspace(task_id)
+                for artifact in artifacts:
+                    from app.workspace.models import WorkspaceItem
+                    item = WorkspaceItem(
+                        name=artifact.get("name", "unnamed"),
+                        type=artifact.get("type", "text"),
+                        content=artifact.get("content", ""),
+                        owner=artifact.get("metadata", {}).get("created_by", "system"),
+                        metadata=artifact.get("metadata", {}),
+                    )
+                    self._workspace.add_item(task_id, item)
+                logger.info("Artifacts saved to workspace", task_id=task_id, count=len(artifacts))
+        except Exception:  # noqa: BLE001
+            logger.exception("Failed to extract/save artifacts", task_id=task_id)
 
     @property
     def history(self) -> ExecutionHistory:

@@ -19,7 +19,7 @@
 ## 项目结构
 
 `
-E:\半自动工作台\
+ai-workbench/
 ├── docker-compose.yml          # Docker 编排
 ├── .env                        # 环境变量
 ├── .env.example                # 环境变量模板
@@ -88,8 +88,8 @@ E:\半自动工作台\
 
 `ash
 # 1. 克隆项目
-git clone <repo-url>
-cd 半自动工作台
+git clone https://github.com/linluhe007-art/ai-workbench.git
+cd ai-workbench
 
 # 2. 复制环境变量
 cp .env.example .env
@@ -150,4 +150,4 @@ docker-compose down -v        # 停止并删除数据卷
 
 ## License
 
-Private - For personal use only
+[MIT](./LICENSE) — 可自由使用、修改和分发，保留版权声明即可。

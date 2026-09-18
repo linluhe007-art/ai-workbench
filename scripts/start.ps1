@@ -2,7 +2,9 @@
 # 在 PowerShell 中运行（你的用户账户，非沙箱）
 
 $ErrorActionPreference = "Continue"
-Set-Location "E:\半自动工作台"
+# Resolve the project root from this script's own location instead of a
+# hard-coded machine path, so the script works from any checkout.
+Set-Location (Split-Path -Parent $PSScriptRoot)
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan

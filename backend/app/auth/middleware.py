@@ -45,13 +45,25 @@ class AuthMiddleware(BaseHTTPMiddleware):
             response = await call_next(request)
             return response
 
-        # 2. X-User-ID (dev backwards compat, disabled in production)
-        from app.config import get_settings
+        # 2. X-User-ID: development-only escape hatch. It is trusted input, so it
+        #    takes three independent switches to arm it - explicit opt-in, DEBUG,
+        #    and a non-production APP_ENV - instead of a single default-on flag.
+        from app.config import NON_PRODUCTION_ENVS, get_settings
         settings = get_settings()
-        allow_dev_header = getattr(settings, "auth_allow_dev_user_header", True)
-        if allow_dev_header:
+        app_env = (settings.app_env or "").strip().lower()
+        dev_header_enabled = (
+            settings.auth_allow_dev_user_header
+            and settings.debug
+            and app_env in NON_PRODUCTION_ENVS
+        )
+        if dev_header_enabled:
             user_id = request.headers.get("X-User-ID")
             if user_id:
+                logger.warning(
+                    "Authenticated via X-User-ID development header",
+                    user_id=user_id,
+                    path=request.url.path,
+                )
                 auth_context = auth_service.get_auth_context(
                     user_id=user_id,
                     request_id=request_id,

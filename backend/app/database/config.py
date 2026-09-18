@@ -8,7 +8,7 @@ from pydantic_settings import BaseSettings
 
 class DatabaseSettings(BaseSettings):
     """Database connection settings, read from environment variables."""
-    database_url: str = "postgresql+asyncpg://workbench:workbench_dev_2026@localhost:5432/ai_workbench"
+    database_url: str = "postgresql+asyncpg://workbench:change_me_local_dev_only@localhost:5432/ai_workbench"
     database_pool_size: int = 5
     database_max_overflow: int = 10
     database_echo: bool = False

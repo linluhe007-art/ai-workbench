@@ -467,11 +467,42 @@ class TestAuthAPIBearer:
         assert data["is_authenticated"] is False
 
     @pytest.mark.asyncio
-    async def test_x_user_id_still_works(self):
+    async def test_x_user_id_header_is_ignored_by_default(self):
+        """X-User-ID is trusted input, so it must not authenticate unless explicitly armed."""
+        resp = await _api("GET", "/auth/me", headers={"X-User-ID": "user-admin"})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["is_authenticated"] is False
+
+    @pytest.mark.asyncio
+    async def test_x_user_id_header_used_forged_admin_when_armed(self, monkeypatch):
+        """Documents the opt-in: all three switches on -> header is honoured for local dev."""
+        from app.config import get_settings
+
+        settings = get_settings()
+        monkeypatch.setattr(settings, "auth_allow_dev_user_header", True)
+        monkeypatch.setattr(settings, "debug", True)
+        monkeypatch.setattr(settings, "app_env", "development")
+
         resp = await _api("GET", "/auth/me", headers={"X-User-ID": "user-admin"})
         assert resp.status_code == 200
         data = resp.json()
         assert data["is_authenticated"] is True
+        assert data["username"] == "admin"
+
+    @pytest.mark.asyncio
+    async def test_x_user_id_header_stays_off_in_production(self, monkeypatch):
+        """Even with the flag on, a production APP_ENV must refuse the header."""
+        from app.config import get_settings
+
+        settings = get_settings()
+        monkeypatch.setattr(settings, "auth_allow_dev_user_header", True)
+        monkeypatch.setattr(settings, "debug", False)
+        monkeypatch.setattr(settings, "app_env", "production")
+
+        resp = await _api("GET", "/auth/me", headers={"X-User-ID": "user-admin"})
+        assert resp.status_code == 200
+        assert resp.json()["is_authenticated"] is False
 
 
 # =============================================================================

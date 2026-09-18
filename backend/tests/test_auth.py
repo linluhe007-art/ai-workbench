@@ -430,11 +430,21 @@ class TestAuthAPI:
 
     @pytest.mark.asyncio
     async def test_get_me_authenticated(self):
-        resp = await _api("GET", "/auth/me", headers={"X-User-ID": "user-admin"})
+        login_resp = await _api("POST", "/auth/login", json_data={"username": "admin", "password": "admin"})
+        assert login_resp.status_code == 200
+        token = login_resp.json()["access_token"]
+        resp = await _api("GET", "/auth/me", headers={"Authorization": f"Bearer {token}"})
         assert resp.status_code == 200
         data = resp.json()
         assert data["is_authenticated"] is True
         assert data["username"] == "admin"
+
+    @pytest.mark.asyncio
+    async def test_get_me_rejects_dev_user_header(self):
+        """The X-User-ID shortcut is off by default, so it must not authenticate."""
+        resp = await _api("GET", "/auth/me", headers={"X-User-ID": "user-admin"})
+        assert resp.status_code == 200
+        assert resp.json()["is_authenticated"] is False
 
     @pytest.mark.asyncio
     async def test_create_user(self):

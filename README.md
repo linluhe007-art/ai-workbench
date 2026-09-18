@@ -180,13 +180,24 @@ docker compose down -v        # 停止并删除数据卷
 | 持续集成（GitHub Actions 自动跑测试） | ⏳ 待补 |
 | 迁移脚本覆盖全量 Schema（当前仅 1 个初始版本） | ⏳ 待补 |
 
-## 部署前必改（安全提示）
+## 安全现状与部署前必改
 
-本项目用于个人内容运营，**请勿直接暴露到公网**，上线前至少完成以下三项：
+> ⚠️ **本项目处于开发阶段，请勿直接暴露到公网。**
 
-- **修改默认管理员账号**：首次启动会在 `backend/app/auth/service.py` 中播种 `admin / admin` 默认账号，部署前务必改掉密码或删除该种子逻辑。
-- **配置真实密钥**：`.env` 中的 `DEEPSEEK_API_KEY`、`OPENAI_API_KEY` 等敏感项已在 `.env.example` 中留空，请填入你自己的密钥。仓库内不含任何 API 密钥或生产凭证（已对全部提交历史做过密钥扫描）。
-- **换掉本地开发用的数据库口令**：`docker-compose.yml` 与 `.env.example` 中的 PostgreSQL 口令（`workbench` / `workbench_dev_2026`）是**仅供本地开发使用的占位值**，生产部署请一并替换，并同时更新 `DATABASE_URL` 与 `JWT_SECRET_KEY`。
+### 认证层尚未接入路由（重要）
+
+`backend/app/auth/` 下的 JWT、用户/角色、RBAC 权限层已经实现并有测试覆盖，但**目前还没有挂到任何 API 路由上**——全部 158 个接口当前都是匿名可访问的。因此：
+
+- 只在本机或内网运行，不要做公网部署或端口映射；
+- 如需对外提供服务，请先把权限依赖接到路由上。`app/auth/permission.py` 已提供 `require_permission` / `require_any_permission` 装饰器，但接入前需先修正其"找不到 `Request` 参数时静默放行"的行为，否则装饰器会静默失效。
+
+### 部署前必改
+
+- **修改默认管理员账号**：首次启动会在 `backend/app/auth/service.py` 中播种 `admin / admin` 默认账号（拥有全部权限），部署前务必改掉密码或删除该种子逻辑。
+- **换掉 JWT 密钥**：`JWT_SECRET_KEY` 的默认值随仓库公开，用它签发 token 等于任何人都能伪造管理员身份。`APP_ENV` 非 development/test 时应用会**拒绝以该占位符启动**；生成方式：`python -c "import secrets; print(secrets.token_urlsafe(48))"`。
+- **换掉数据库口令**：`docker-compose.yml` / `.env.example` 里的 `change_me_local_dev_only` 只是占位符，生产部署请替换，并同步更新 `DATABASE_URL`。
+- **配置真实模型密钥**：`DEEPSEEK_API_KEY`、`OPENAI_API_KEY` 等已在 `.env.example` 中留空，请填入你自己的密钥。仓库内不含任何 API 密钥或生产凭证（已对**全部提交历史**逐对象扫描确认）。
+- **保持开发用身份头关闭**：`AUTH_ALLOW_DEV_USER_HEADER` 默认为 `false`。它只在 `DEBUG=true` 且 `APP_ENV` 为 development/local 时才可能生效，且需要显式打开——请不要在生产环境开启。
 
 ## License
 

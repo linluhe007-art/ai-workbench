@@ -6,7 +6,7 @@ services:
     container_name: workbench-postgres
     environment:
       POSTGRES_USER: workbench
-      POSTGRES_PASSWORD: workbench_dev_2026
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_local_dev_only}
       POSTGRES_DB: ai_workbench
     ports:
       - "5432:5432"
@@ -45,7 +45,7 @@ services:
     environment:
       POSTGRES_HOST: postgres
       REDIS_HOST: redis
-      DATABASE_URL: postgresql+asyncpg://workbench:workbench_dev_2026@postgres:5432/ai_workbench
+      DATABASE_URL: postgresql+asyncpg://workbench:${POSTGRES_PASSWORD:-change_me_local_dev_only}@postgres:5432/ai_workbench
       REDIS_URL: redis://redis:6379/0
     volumes:
       - ./backend:/app

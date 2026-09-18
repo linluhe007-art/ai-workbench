@@ -1,6 +1,8 @@
-﻿# AI 半自动内容生产工作台 — 系统架构设计文档
+# AI 半自动内容生产工作台 — 系统架构设计文档
 
-> 版本: v0.1 | 日期: 2026-08-08 | 状态: 设计阶段
+> 版本: v0.1 | 日期: 2026-08-08 | 状态: 架构设计基线
+>
+> 说明：本文是项目初期的架构设计基线，用于记录设计意图与取舍。成稿后各 Phase 的对应模块已陆续实现，**实际进度以 [README](../README.md) 的「当前进度」为准**；文中技术选型（如 Celery、向量数据库）为当时的规划，未全部落地。
 
 ---
 
@@ -29,7 +31,7 @@
 
 ### 2.1 架构总览
 
-`
+```
 ┌──────────────────────────────────────────────────────────────────────┐
 │                         Frontend (React + TS)                        │
 │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐  │
@@ -78,11 +80,11 @@
 │  │  └──────────┘ └──────────┘ └──────────┘ └──────────────────┘  │  │
 │  └────────────────────────────────────────────────────────────────┘  │
 └──────────────────────────────────────────────────────────────────────┘
-`
+```
 
 ### 2.2 核心数据流
 
-`
+```
 用户输入意图
     │
     ▼
@@ -105,7 +107,7 @@ Content Review (用户审核)
     │
     ├─► 通过 ──► 发布队列
     └─► 修改 ──► 局部重新生成 ──► 回到审核
-`
+```
 
 ---
 
@@ -168,7 +170,7 @@ Content Review (用户审核)
 
 #### 设计模式：Adapter Pattern + Registry Pattern
 
-`
+```
                     ┌─────────────────┐
                     │  BaseAgent       │  (抽象基类)
                     │  + chat()        │
@@ -182,11 +184,11 @@ Content Review (用户审核)
   │ CodexAdapter  │  │HunyuanAdapter│  │ClaudeAdapter  │
   │               │  │             │  │               │
   └───────────────┘  └─────────────┘  └───────────────┘
-`
+```
 
 #### Agent Registry 数据结构
 
-`python
+```python
 class AgentConfig(BaseModel):
     id: str                    # 唯一标识, e.g. "codex-v1"
     name: str                  # 显示名称, e.g. "Codex Agent"
@@ -199,11 +201,11 @@ class AgentConfig(BaseModel):
     max_concurrent: int        # 最大并发
     rate_limit: RateLimitConfig
     fallback_agent_id: str | None  # 降级 Agent
-`
+```
 
 #### 能力标签体系
 
-`
+```
 capability_tags = {
     "research":     ["web_search", "rss_parse", "news_crawl"],
     "analysis":     ["content_eval", "trend_analysis", "sentiment"],
@@ -212,12 +214,12 @@ capability_tags = {
     "seo":          ["title_gen", "tag_suggest", "topic_research"],
     "multimodal":   ["image_understand", "video_analyze"],
 }
-`
+```
 
 #### 扩展机制
 
 新增 Agent 只需：
-1. 创建新文件 ackend/agents/adapters/new_agent.py
+1. 创建新文件 backend/agents/adapters/new_agent.py
 2. 继承 BaseAgent
 3. 实现必要方法
 4. 在 config/agents.yaml 注册配置
@@ -230,13 +232,13 @@ capability_tags = {
 
 #### 任务拆解引擎
 
-`
+```
 用户意图 ──► Intent Parser ──► Task DAG Builder ──► Scheduler ──► Executor
-`
+```
 
 #### Task DAG (有向无环图)
 
-`python
+```python
 class TaskNode(BaseModel):
     id: str
     type: TaskType          # research/analysis/writing/image/seo
@@ -247,11 +249,11 @@ class TaskNode(BaseModel):
     result: dict | None
     retry_count: int
     max_retries: int
-`
+```
 
 #### 内容生产 Pipeline 模板
 
-`python
+```python
 CONTENT_PIPELINE = {
     "name": "standard_content",
     "tasks": [
@@ -262,19 +264,19 @@ CONTENT_PIPELINE = {
         {"id": "seo",       "type": "seo",        "depends_on": ["writing"]},
     ]
 }
-`
+```
 
 分析和写作串行，封面生成和 SEO 可并行。
 
 #### 状态机
 
-`
+```
 pending ──► running ──► success
                 │
                 └──► failed ──► retry? ──► running
                                 │
                                 └──► dead_letter
-`
+```
 
 ---
 
@@ -303,7 +305,7 @@ pending ──► running ──► success
 
 #### 功能清单
 
-`
+```
 审核页面
 ├── 内容预览 (标题/正文/封面/标签)
 ├── 在线编辑器 (富文本 / Markdown)
@@ -321,7 +323,7 @@ pending ──► running ──► success
     ├── 选择平台
     ├── 设置时间
     └── 确认发布
-`
+```
 
 ---
 
@@ -329,7 +331,7 @@ pending ──► running ──► success
 
 #### 存储结构
 
-`python
+```python
 class KnowledgeEntry(BaseModel):
     id: str
     user_id: str
@@ -338,7 +340,7 @@ class KnowledgeEntry(BaseModel):
     metadata: dict      # 元数据
     embedding: list[float]  # 向量 (由后端生成)
     created_at: datetime
-`
+```
 
 #### 使用场景
 
@@ -352,17 +354,17 @@ class KnowledgeEntry(BaseModel):
 
 #### 架构
 
-`
+```
 CrawlerService
 ├── RSSCrawler          # RSS 订阅源
 ├── WebParser           # 网页内容解析
 ├── SearchAPICrawler    # 搜索 API (扩展)
 └── SocialCrawler       # 社交媒体 (扩展)
-`
+```
 
 #### MVP 数据源
 
-`yaml
+```yaml
 sources:
   - name: "36kr AI"
     type: rss
@@ -376,7 +378,7 @@ sources:
     type: rss
     url: "https://hnrss.org/newest?q=AI"
     category: tech
-`
+```
 
 ---
 
@@ -384,7 +386,7 @@ sources:
 
 ### 5.1 核心表
 
-`
+```
 ┌─────────────────────────────────────────────────────────┐
 │ users                                                    │
 ├─────────────────────────────────────────────────────────┤
@@ -560,18 +562,18 @@ sources:
 │ is_used         BOOLEAN     DEFAULT false               │
 │ created_at      TIMESTAMPTZ                             │
 └─────────────────────────────────────────────────────────┘
-`
+```
 
 ### 5.2 索引策略
 
-`sql
+```sql
 -- 高频查询索引
 CREATE INDEX idx_tasks_user_status ON tasks(user_id, status);
 CREATE INDEX idx_contents_user_status ON contents(user_id, status);
 CREATE INDEX idx_messages_conversation ON messages(conversation_id, created_at);
 CREATE INDEX idx_crawled_items_source ON crawled_items(source_id, created_at);
 CREATE INDEX idx_knowledge_user_category ON knowledge_entries(user_id, category);
-`
+```
 
 ---
 
@@ -579,46 +581,46 @@ CREATE INDEX idx_knowledge_user_category ON knowledge_entries(user_id, category)
 
 ### 6.1 认证
 
-`
+```
 POST   /api/v1/auth/register          注册
 POST   /api/v1/auth/login             登录 → JWT
 POST   /api/v1/auth/refresh           刷新 Token
 GET    /api/v1/auth/me                当前用户信息
-`
+```
 
 ### 6.2 Agent 管理
 
-`
+```
 GET    /api/v1/agents                 列表
 GET    /api/v1/agents/{id}            详情
 GET    /api/v1/agents/{id}/status     状态
 POST   /api/v1/agents                 创建 (管理员)
 PUT    /api/v1/agents/{id}            更新
-`
+```
 
 ### 6.3 对话 & 聊天
 
-`
+```
 GET    /api/v1/conversations          列表
 POST   /api/v1/conversations          创建
 GET    /api/v1/conversations/{id}     详情+消息
 POST   /api/v1/conversations/{id}/messages   发送消息
 WS     /ws/conversations/{id}         WebSocket 实时流
-`
+```
 
 ### 6.4 任务
 
-`
+```
 POST   /api/v1/tasks                  创建任务 (触发 Pipeline)
 GET    /api/v1/tasks                  任务列表
 GET    /api/v1/tasks/{id}             任务详情
 POST   /api/v1/tasks/{id}/retry       重试任务
 POST   /api/v1/tasks/{id}/cancel      取消任务
-`
+```
 
 ### 6.5 内容
 
-`
+```
 GET    /api/v1/contents               内容列表
 GET    /api/v1/contents/{id}          内容详情
 PUT    /api/v1/contents/{id}          编辑内容
@@ -626,33 +628,33 @@ POST   /api/v1/contents/{id}/approve  审批通过
 POST   /api/v1/contents/{id}/reject   打回
 POST   /api/v1/contents/{id}/regenerate/{step}  单步重新生成
 GET    /api/v1/contents/{id}/versions 版本历史
-`
+```
 
 ### 6.6 知识库
 
-`
+```
 GET    /api/v1/knowledge              知识列表
 POST   /api/v1/knowledge              添加知识
 PUT    /api/v1/knowledge/{id}         更新
 DELETE /api/v1/knowledge/{id}         删除
 POST   /api/v1/knowledge/search       向量搜索
-`
+```
 
 ### 6.7 采集源
 
-`
+```
 GET    /api/v1/crawler/sources        源列表
 POST   /api/v1/crawler/sources        添加源
 POST   /api/v1/crawler/sources/{id}/trigger  手动触发采集
 GET    /api/v1/crawler/items          采集结果列表
-`
+```
 
 ---
 
 ## 七、项目目录结构
 
-`
-E:\半自动工作台\
+```
+ai-workbench/
 ├── README.md
 ├── docker-compose.yml
 ├── .env.example
@@ -831,13 +833,13 @@ E:\半自动工作台\
     ├── init_db.py
     ├── seed_agents.py
     └── start_dev.sh
-`
+```
 
 ---
 
 ## 八、开发路线图
 
-### Phase 1 — 项目骨架 & 基础设施 ⬅ 当前
+### Phase 1 — 项目骨架 & 基础设施
 
 **目标**: 前后端项目可运行，数据库连接正常
 
@@ -964,4 +966,4 @@ E:\半自动工作台\
 
 ---
 
-> **下一步**: 等待确认后，开始 Phase 1 开发。
+> **下一步**: 本设计文档成稿后进入编码阶段；各 Phase 的实际完成情况见 [README](../README.md)。

@@ -74,8 +74,8 @@ class Settings(BaseSettings):
     openai_api_key: str = ""
     openai_base_url: str = "https://api.openai.com/v1"
     openai_model: str = "gpt-4o-mini"
-    # Memory — Obsidian 知识库路径（可选，可通过 OBSIDIAN_VAULT_PATH 覆盖）
-    obsidian_vault_path: str = r"D:\Obsidian仓库\个人知识库"
+    # Memory — Obsidian 知识库路径（可选，通过 OBSIDIAN_VAULT_PATH 环境变量指定）
+    obsidian_vault_path: str = r"/path/to/your/obsidian/vault"
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "extra": "ignore"}
 

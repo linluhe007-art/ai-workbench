@@ -1,81 +1,94 @@
-﻿# AI 半自动内容生产工作台
+# AI 半自动内容生产工作台
 
 > AI 做重活，人做决策 — 个人 AI 内容运营工作台
+
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=flat-square&logo=redis&logoColor=white)](https://redis.io/)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
 ## 项目概述
 
 面向个人内容创作者的 AI 半自动内容运营工作台。AI 负责热点采集、内容分析、文章生成、封面方案等，用户负责审核、修改和确认发布。
 
+设计信条是**半自动**：AI 生产内容，人类审核把关，**绝不自动发布**。系统的价值不在于替人发文，而在于把「找选题、读资料、写初稿、配标题」这些重活压缩成一次审核动作。
+
+## 功能亮点
+
+| 能力 | 说明 |
+|------|------|
+| 🤖 Agent 体系 | Agent 注册表、能力标签、生命周期管理、心跳与调度，可插拔接入不同模型 |
+| 🧭 任务编排 | 把一句意图拆成任务 DAG，按依赖调度执行，支持失败重试与单步重跑 |
+| 📄 内容生产流水线 | 采集 → 分析 → 写作 → 封面方案 → 标题标签，每步结果落库，可断点续传 |
+| ✅ 内容审核中心 | 在线编辑、单步重新生成、版本对比、通过/打回/搁置 |
+| 🧠 知识库与长期记忆 | 沉淀用户偏好、写作风格与历史内容，生成时检索并注入 Prompt |
+| 🔌 统一模型接入层 | Adapter 模式封装模型差异，密钥只走环境变量，前端零接触 |
+| 📊 可观测性 | 结构化日志、调用链路追踪、指标统计与审计记录 |
+| 🖥 Web 工作台 | React 前端，覆盖仪表盘、对话、任务中心、审核、知识库等 30 个页面 |
+
 ## 技术栈
 
 | 层级 | 技术 |
 |------|------|
-| 前端 | React 18 + TypeScript + Vite + Ant Design + Zustand |
-| 后端 | Python 3.11 + FastAPI + SQLAlchemy 2.0 |
-| 数据库 | PostgreSQL 16 |
-| 缓存/队列 | Redis 7 |
+| 前端 | React 18 + TypeScript 5.6 + Vite 6 + Ant Design 5 + Zustand 5 + TanStack Query + React Flow |
+| 后端 | Python 3.11 + FastAPI 0.115 + SQLAlchemy 2.0（async）+ Pydantic v2 |
+| 数据库 | PostgreSQL 16（asyncpg 驱动） |
+| 缓存 | Redis 7 |
+| 认证 | JWT（python-jose）+ bcrypt（passlib）+ 基于角色的权限层 |
+| 日志 | structlog 结构化日志 |
+| 测试 | pytest + httpx（后端）、Vitest + Testing Library（前端） |
 | 容器化 | Docker + Docker Compose |
 
 ## 项目结构
 
-`
+```text
 ai-workbench/
-├── docker-compose.yml          # Docker 编排
-├── .env                        # 环境变量
-├── .env.example                # 环境变量模板
+├── docker-compose.yml           # 一键编排 postgres / redis / backend / frontend
+├── .env.example                 # 环境变量模板（复制为 .env 后填入自己的值）
 ├── README.md
+├── DEPLOYMENT.md                # 部署说明
+├── LICENSE                      # MIT
 ├── docs/
-│   └── architecture.md         # 架构设计文档
+│   └── architecture.md          # 架构设计文档
 │
-├── frontend/                   # 前端项目
-│   ├── Dockerfile
-│   ├── package.json
-│   ├── vite.config.ts
-│   ├── tsconfig.json
+├── frontend/                    # React 18 + TS + Vite
 │   └── src/
-│       ├── main.tsx            # 入口
-│       ├── App.tsx             # 路由
-│       ├── api/                # API 请求层
-│       ├── components/         # 通用组件
-│       │   └── Layout/         # 主布局
-│       ├── pages/              # 页面
-│       │   ├── Dashboard/      # 工作台面板
-│       │   ├── Chat/           # AI 对话
-│       │   ├── TaskCenter/     # 任务中心
-│       │   ├── ContentReview/  # 内容审核
-│       │   ├── KnowledgeBase/  # 知识库
-│       │   └── Login/          # 登录
-│       ├── stores/             # Zustand 状态
-│       ├── hooks/              # 自定义 Hooks
-│       ├── types/              # TypeScript 类型
-│       └── utils/              # 工具函数
+│       ├── main.tsx             # 入口
+│       ├── App.tsx              # 路由
+│       ├── pages/               # 30 个页面（仪表盘/对话/任务中心/审核/知识库…）
+│       ├── components/          # 通用组件
+│       ├── api/                 # API 请求层
+│       ├── stores/              # Zustand 状态
+│       ├── websocket/           # 实时通信
+│       ├── hooks/ types/ utils/
+│       └── __tests__/           # 前端测试
 │
-├── backend/                    # 后端项目
-│   ├── Dockerfile
+├── backend/                     # FastAPI
 │   ├── requirements.txt
-│   ├── alembic.ini
-│   ├── alembic/                # 数据库迁移
+│   ├── alembic/                 # 数据库迁移
+│   ├── tests/                   # 127 个测试模块
 │   └── app/
-│       ├── main.py             # FastAPI 入口
-│       ├── config.py           # 配置管理
-│       ├── api/v1/             # API 路由
-│       │   ├── router.py       # 路由聚合
-│       │   └── health.py       # 健康检查
-│       ├── agents/             # Agent 系统 (Phase 3)
-│       │   └── adapters/       # 模型适配器
-│       ├── orchestrator/       # 任务编排 (Phase 4)
-│       ├── services/           # 业务服务
-│       ├── models/             # 数据模型
-│       ├── schemas/            # Pydantic Schemas
-│       ├── database/           # 数据库连接
-│       │   ├── __init__.py     # SQLAlchemy 连接
-│       │   └── redis.py        # Redis 连接
-│       ├── tasks/              # Celery 任务
-│       └── utils/              # 工具
-│           └── logger.py       # 日志配置
+│       ├── main.py              # 应用入口
+│       ├── config.py            # 配置管理
+│       ├── api/v1/              # 34 个路由模块
+│       ├── auth/                # 认证、RBAC 权限、中间件
+│       ├── agents/              # Agent 注册表 / 生命周期 / 调度 / 心跳
+│       ├── llm/                 # 模型接入与适配
+│       ├── orchestrator/        # 任务编排引擎
+│       ├── planning/            # 任务规划
+│       ├── execution/           # 执行器
+│       ├── automation/          # 自动化流水线
+│       ├── knowledge/ memory/   # 知识库与长期记忆
+│       ├── analytics/ observability/ audit/   # 统计、可观测性、审计
+│       ├── models/ schemas/     # ORM 模型与 Pydantic Schema
+│       └── database/            # PostgreSQL / Redis 连接
 │
-└── scripts/                    # 辅助脚本
-`
+└── scripts/                     # 辅助脚本
+```
 
 ## 快速开始
 
@@ -86,7 +99,7 @@ ai-workbench/
 
 ### 安装步骤
 
-`ash
+```bash
 # 1. 克隆项目
 git clone https://github.com/linluhe007-art/ai-workbench.git
 cd ai-workbench
@@ -95,11 +108,11 @@ cd ai-workbench
 cp .env.example .env
 
 # 3. 启动所有服务
-docker-compose up --build -d
+docker compose up --build -d
 
 # 4. 查看日志
-docker-compose logs -f
-`
+docker compose logs -f
+```
 
 ### 访问地址
 
@@ -115,7 +128,7 @@ docker-compose logs -f
 
 ### 本地开发 (不用 Docker)
 
-`ash
+```bash
 # 后端
 cd backend
 python -m venv venv
@@ -127,33 +140,53 @@ uvicorn app.main:app --reload --port 8000
 cd frontend
 npm install
 npm run dev
-`
+```
 
 > 注意: 本地开发需自行安装 PostgreSQL 和 Redis，并修改 .env 中的连接地址为 localhost。
 
+### 运行测试
+
+```bash
+# 后端
+cd backend
+pip install -r requirements-dev.txt
+pytest
+
+# 前端
+cd frontend
+npm test
+```
+
 ## 停止服务
 
-`ash
-docker-compose down           # 停止
-docker-compose down -v        # 停止并删除数据卷
-`
+```bash
+docker compose down           # 停止
+docker compose down -v        # 停止并删除数据卷
+```
 
-## 开发路线图
+## 当前进度
 
-- [x] Phase 1: 项目骨架 & 基础设施
-- [ ] Phase 2: 用户系统 (注册/登录/JWT)
-- [ ] Phase 3: Agent Gateway (AI 模型接入)
-- [ ] Phase 4: 任务编排器 (Pipeline)
-- [ ] Phase 5: 内容生产 Pipeline
-- [ ] Phase 6: 前端工作台完善
-- [ ] Phase 7: 测试 & 优化
+| 模块 | 状态 |
+|------|------|
+| 项目骨架与基础设施（Docker Compose 四服务、配置管理、健康检查） | ✅ 已完成 |
+| 用户系统（注册/登录/JWT/刷新、RBAC 权限层） | ✅ 已完成 |
+| Agent 体系（注册表、能力标签、生命周期、调度、心跳） | ✅ 已完成 |
+| 统一模型接入层（Adapter 模式、密钥环境变量注入） | ✅ 已完成 |
+| 任务编排（意图拆解、DAG 调度、重试、执行记录） | ✅ 已完成 |
+| 内容生产流水线（采集/分析/写作/封面/SEO + 结果持久化） | ✅ 已完成 |
+| 内容审核中心（在线编辑、单步重生成、版本管理） | ✅ 已完成 |
+| 前端工作台（30 个页面，含实时通信） | ✅ 已完成 |
+| 后端测试（127 个测试模块） | ✅ 已完成 |
+| 持续集成（GitHub Actions 自动跑测试） | ⏳ 待补 |
+| 迁移脚本覆盖全量 Schema（当前仅 1 个初始版本） | ⏳ 待补 |
 
 ## 部署前必改（安全提示）
 
-本项目用于个人内容运营，**请勿直接暴露到公网**，上线前至少完成以下两项：
+本项目用于个人内容运营，**请勿直接暴露到公网**，上线前至少完成以下三项：
 
 - **修改默认管理员账号**：首次启动会在 `backend/app/auth/service.py` 中播种 `admin / admin` 默认账号，部署前务必改掉密码或删除该种子逻辑。
-- **配置真实密钥**：`.env` 中的 `DEEPSEEK_API_KEY` 等敏感项已在 `.env.example` 中留空，请填入你自己的密钥；仓库内不含任何真实凭证（已通过全量历史扫描确认）。
+- **配置真实密钥**：`.env` 中的 `DEEPSEEK_API_KEY`、`OPENAI_API_KEY` 等敏感项已在 `.env.example` 中留空，请填入你自己的密钥。仓库内不含任何 API 密钥或生产凭证（已对全部提交历史做过密钥扫描）。
+- **换掉本地开发用的数据库口令**：`docker-compose.yml` 与 `.env.example` 中的 PostgreSQL 口令（`workbench` / `workbench_dev_2026`）是**仅供本地开发使用的占位值**，生产部署请一并替换，并同时更新 `DATABASE_URL` 与 `JWT_SECRET_KEY`。
 
 ## License
 

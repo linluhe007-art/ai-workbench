@@ -5,6 +5,10 @@
 - Docker 24+ & Docker Compose v2
 - 4 GB RAM minimum (8 GB recommended)
 - PostgreSQL 16, Redis 7 (managed via Docker)
+- Your own `scripts/nginx.prod.conf`. The production compose file mounts it as the
+  reverse-proxy config, but it is **not shipped with this repository** — supply one
+  before starting the stack, or remove the `nginx` service if you terminate TLS
+  elsewhere.
 
 ## Environment Variables
 
@@ -22,7 +26,7 @@
 
 ```bash
 # Clone and start
-git clone <repo-url> && cd ai-workbench
+git clone https://github.com/linluhe007-art/ai-workbench.git && cd ai-workbench
 cp .env.example .env
 docker compose -f docker-compose.prod.yml up -d
 
